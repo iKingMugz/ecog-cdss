@@ -7,75 +7,37 @@
 
 <style>
 
-/* global */
 body {
   margin: 0;
   font-family: Arial, sans-serif;
-  background: radial-gradient(circle at top, #2b183d, #160b22, #09040f);
+  background: radial-gradient(circle at top, #193d18ff, #0e220bff, #040f07ff);
   color: white;
 }
 
-/* navbar */
 .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 14px 20px;
-  background: rgba(42, 24, 61, 0.78);
+  background: rgba(17, 220, 75, 0.78);
   backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgba(200,170,255,0.15);
+  border-bottom: 1px solid rgba(15, 197, 30, 0.15);
 }
 
-/* logo */
-.logo {
-  font-size: 22px;
-  font-weight: bold;
-  background: linear-gradient(
-      90deg,
-      #f3e5ff,
-      #d8b4ff,
-      #b784ff,
-      #e7d2ff
-  );
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
 
-/* search */
-.search-box {
-  padding: 8px 10px;
-  border-radius: 10px;
-  border: 1px solid rgba(210,180,255,0.2);
-  outline: none;
-  background: rgba(255,255,255,0.05);
-  color: white;
-}
-
+\
 .search-box::placeholder {
-  color: #d9c7ee;
+  color: #5d00c8ff;
 }
 
-/* nav buttons */
-.nav-button {
-  display: inline-block;
-  padding: 10px 16px;
-  margin: 8px;
-  background: linear-gradient(135deg, #d7a9ff, #a86cff);
-  color: white;
-  font-weight: bold;
-  text-decoration: none;
-  border-radius: 12px;
-  transition: 0.25s;
-  box-shadow: 0 4px 15px rgba(95,40,145,.35);
-}
+
 
 .nav-button:hover {
   transform: translateY(-2px) scale(1.05);
-  background: linear-gradient(135deg, #edd8ff, #b67bff);
-  box-shadow: 0 0 22px rgba(184,120,255,.55);
+  background: linear-gradient(135deg, #d8ffdeff, #7bff82ff);
+  box-shadow: 0 0 22px rgba(120, 255, 131, 0.55);
 }
 
-/* grid */
 .flex-container {
   display: flex;
   flex-wrap: wrap;
@@ -89,24 +51,19 @@ body {
   text-decoration: none;
 }
 
-/* AMETHYST GAME TILE */
 .game-tile {
   width: 190px;
   padding: 10px;
   text-align: center;
 
-  background: rgba(255,255,255,0.06);
-  border: 1px solid rgba(220,180,255,0.15);
-  border-radius: 16px;
+  
 
   transition: .25s ease;
-  backdrop-filter: blur(8px);
 
   position: relative;
   overflow: hidden;
 }
 
-/* crystal glow */
 .game-tile::before {
   content: "";
   position: absolute;
@@ -117,7 +74,7 @@ body {
 
   background:
       radial-gradient(circle,
-      rgba(215,170,255,.22),
+      rgba(180, 255, 170, 0.22),
       transparent 65%);
 
   transform: rotate(25deg);
@@ -131,10 +88,10 @@ body {
 
 .game-tile:hover {
   transform: translateY(-6px) scale(1.05);
-  border-color: rgba(200,140,255,.45);
+  border-color: rgba(163, 255, 140, 0.45);
   box-shadow:
-      0 0 25px rgba(170,110,255,.28),
-      0 0 40px rgba(130,70,220,.18);
+      0 0 25px rgba(110, 255, 122, 0.28),
+      0 0 40px rgba(70, 220, 92, 0.18);
 }
 
 /* image */
@@ -144,13 +101,13 @@ body {
   object-fit: cover;
 
   border-radius: 12px;
-  border: 2px solid rgba(220,180,255,.12);
+  border: 2px solid rgba(180, 255, 203, 0.12);
 
   transition: .25s;
 }
 
 .game-tile:hover .game-icon {
-  border-color: rgba(235,210,255,.45);
+  border-color: rgba(210, 255, 221, 0.45);
 }
 
 /* title */
@@ -158,13 +115,13 @@ body {
   margin-top: 10px;
   font-size: 14px;
   font-weight: 600;
-  color: #efe5ff;
+  color: #e6ffe5ff;
 }
 
 /* popular */
 .popular {
-  border: 1px solid #d59cff;
-  box-shadow: 0 0 18px rgba(210,140,255,.35);
+  border: 1px solid #a4ff9cff;
+  box-shadow: 0 0 18px rgba(150, 255, 140, 0.35);
 }
 
 </style>
@@ -173,7 +130,6 @@ body {
 
 <body>
 
-<!-- FLASH WELCOME POPUP -->
 <div id="flashPopup" class="flash-popup">
 
   <div class="flash-popup-box">
@@ -209,16 +165,16 @@ body {
     padding: 12px 20px;
     margin: 10px;
 
-    background: linear-gradient(135deg, #d7a9ff, #a86cff);
+    background: linear-gradient(135deg, #afffa9ff, #80ff6cff);
     color: white;
     font-weight: bold;
     text-decoration: none;
 
     border-radius: 12px;
-    border: 1px solid rgba(235,210,255,.15);
+    border: 1px solid rgba(210, 255, 214, 0.15);
 
     transition: .25s;
-    box-shadow: 0 5px 18px rgba(120,70,190,.35);
+    box-shadow: 0 5px 18px rgba(70, 190, 76, 0.35);
 }
 
 .nav-button:hover {
@@ -226,18 +182,16 @@ body {
 
     background: linear-gradient(
         135deg,
-        #edd8ff,
-        #c892ff
+        #d8ffddff,
+        #92ffa8ff
     );
 
     box-shadow:
-        0 0 20px rgba(190,120,255,.45),
-        0 0 35px rgba(140,80,220,.25);
+        0 0 20px rgba(147, 255, 120, 0.45),
+        0 0 35px rgba(80, 220, 94, 0.25);
 }
 
-/* ===========================
-   POPUP BACKGROUND
-=========================== */
+
 
 .flash-popup {
     position: fixed;
@@ -247,15 +201,12 @@ body {
     align-items: center;
     justify-content: center;
 
-    background: rgba(8,4,15,.88);
+    background: rgba(4, 15, 5, 0.88);
     backdrop-filter: blur(10px);
 
     z-index: 9999;
 }
 
-/* ===========================
-   POPUP BOX
-=========================== */
 
 .flash-popup-box {
 
@@ -271,112 +222,14 @@ body {
     background:
         linear-gradient(
             145deg,
-            rgba(52,30,78,.95),
-            rgba(25,12,40,.95)
+            rgba(30, 78, 52, 0.95),
+            rgba(12, 40, 15, 0.95)
         );
 
-    border: 1px solid rgba(220,180,255,.25);
+    border: 1px solid rgba(180, 255, 195, 0.25);
 
-    backdrop-filter: blur(12px);
 
-    box-shadow:
-        0 0 35px rgba(170,110,255,.25),
-        inset 0 0 25px rgba(255,255,255,.03);
-}
-
-/* ===========================
-   TITLE
-=========================== */
-
-.flash-title {
-
-    margin: 0;
-
-    font-size: 64px;
-    font-weight: 800;
-
-    background: linear-gradient(
-        90deg,
-        #f5ebff,
-        #d9b7ff,
-        #b87dff
-    );
-
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-
-    text-shadow:
-        0 0 25px rgba(200,150,255,.35);
-}
-
-/* ===========================
-   DESCRIPTION
-=========================== */
-
-.flash-desc {
-
-    margin-top: 18px;
-
-    font-size: 17px;
-    line-height: 1.7;
-
-    color: #efe5ff;
-}
-
-/* ===========================
-   LINK
-=========================== */
-
-.flash-link {
-
-    color: #d9b7ff;
-
-    text-decoration: underline;
-
-    font-weight: bold;
-
-    transition: .2s;
-}
-
-.flash-link:hover {
-
-    color: #ffffff;
-
-    text-shadow:
-        0 0 10px rgba(215,169,255,.8);
-}
-
-/* ===========================
-   BUTTON
-=========================== */
-
-.flash-button {
-
-    margin-top: 28px;
-
-    padding: 13px 34px;
-
-    font-size: 18px;
-    font-weight: bold;
-
-    color: white;
-
-    border: none;
-    border-radius: 12px;
-
-    cursor: pointer;
-
-    background: linear-gradient(
-        135deg,
-        #d7a9ff,
-        #a86cff
-    );
-
-    transition: .25s;
-
-    box-shadow:
-        0 6px 18px rgba(130,70,220,.35);
-}
+  
 
 .flash-button:hover {
 
@@ -384,12 +237,12 @@ body {
 
     background: linear-gradient(
         135deg,
-        #edd8ff,
-        #c892ff
+        #d8ffd8ff,
+        #a1ff92ff
     );
 
     box-shadow:
-        0 0 25px rgba(190,120,255,.45);
+        0 0 25px rgba(127, 255, 120, 0.45);
 }
   
 </style>
