@@ -6,14 +6,7 @@
 <title>POG Sites</title>
 
 <style>
-/* ==========================
-   global
-========================== */
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
+
 
 body{
     font-family:Arial,sans-serif;
@@ -32,72 +25,7 @@ body{
     overflow-x:hidden;
 }
 
-/* gemstone glows */
 
-body::before{
-    content:"";
-    position:fixed;
-
-    width:700px;
-    height:700px;
-
-    background:rgba(190,140,255,.16);   /* Amethyst */
-
-    filter:blur(150px);
-
-    border-radius:50%;
-
-    top:-220px;
-    left:-180px;
-
-    pointer-events:none;
-}
-
-body::after{
-    content:"";
-    position:fixed;
-
-    width:700px;
-    height:700px;
-
-    background:rgba(130,255,190,.12);   /* Malachite */
-
-    filter:blur(150px);
-
-    border-radius:50%;
-
-    bottom:-220px;
-    right:-180px;
-
-    pointer-events:none;
-}
-
-/* extra Opal glow */
-
-.container::before{
-
-    content:"";
-
-    position:absolute;
-
-    width:450px;
-    height:450px;
-
-    background:rgba(180,225,255,.10);
-
-    filter:blur(120px);
-
-    top:-100px;
-    right:-120px;
-
-    border-radius:50%;
-
-    pointer-events:none;
-}
-
-/* ==========================
-   container
-========================== */
 
 .container{
 
@@ -126,9 +54,6 @@ body::after{
         0 0 60px rgba(120,255,180,.08);
 }
 
-/* ==========================
-   title
-========================== */
 
 .title{
 
@@ -138,38 +63,17 @@ body::after{
 
     margin-bottom:22px;
 
-    background:linear-gradient(
-        90deg,
-        #d8b4ff,
-        #bfeaff,
-        #ffc9e8,
-        #86efac,
-        #d8b4ff
-    );
+
 
     background-size:300%;
 
     -webkit-background-clip:text;
-    -webkit-text-fill-color:transparent;
 
     animation:gemFlow 8s linear infinite;
 }
 
-@keyframes gemFlow{
 
-    from{
-        background-position:0%;
-    }
 
-    to{
-        background-position:300%;
-    }
-
-}
-
-/* ==========================
-   subtitle
-========================== */
 
 .subtitle{
 
@@ -186,9 +90,7 @@ body::after{
     margin-bottom:50px;
 }
 
-/* ==========================
-   buttons
-========================== */
+
 
 .button-grid{
 
@@ -209,20 +111,11 @@ body::after{
 
     border-radius:18px;
 
-    font-size:1.15rem;
-
-    font-weight:bold;
-
-    transition:.25s;
-
-    backdrop-filter:blur(8px);
-
-    border:1px solid rgba(255,255,255,.10);
 
     background:linear-gradient(
         135deg,
-        rgba(215,170,255,.65),
-        rgba(185,230,255,.65)
+        rgba(170, 255, 173, 0.65),
+        rgba(185, 255, 197, 0.65)
     );
 
     box-shadow:
@@ -235,13 +128,13 @@ body::after{
 
     background:linear-gradient(
         135deg,
-        rgba(255,205,235,.85),
+        rgba(211, 255, 205, 0.85),
         rgba(170,255,195,.80)
     );
 
     box-shadow:
-        0 0 24px rgba(255,220,255,.20),
-        0 0 28px rgba(150,255,200,.15);
+        0 0 24px rgba(220, 255, 222, 0.2),
+        0 0 28px rgba(153, 255, 150, 0.15);
 }
 
 .ecog-button span{
@@ -255,14 +148,6 @@ body::after{
     opacity:.82;
 }
 
-.extra-button{
-
-    grid-column:1/-1;
-
-    justify-self:center;
-
-    max-width:320px;
-}
 
 /* ==========================
    footer
@@ -300,13 +185,11 @@ body::after{
     <div class="button-grid">
 
         <a href="g.html" class="ecog-button extra-button">
-            ⚡ Amethyst
-            <span>Games, Flash Games, Emulator Games</span>
+             Games
         </a>
 
         <a href="otherfiles.html" class="ecog-button extra-button">
-            ➕ Opal
-            <span>Experiments and extras.</span>
+            Extra Files
         </a>
 
         
@@ -314,7 +197,7 @@ body::after{
     </div>
 
     <div class="footer">
-        POG Sites • By MTKSIKM
+        POG Sites • By iKingMugz
     </div>
 
    <div class="footer">
