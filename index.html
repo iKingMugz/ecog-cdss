@@ -7,208 +7,3023 @@
 
 <style>
 
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: radial-gradient(circle at top, #193d18ff, #0e220bff, #040f07ff);
+  color: white;
+}
 
-body{
-    font-family:Arial,sans-serif;
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 20px;
+  background: rgba(17, 220, 75, 0.78);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(15, 197, 30, 0.15);
+}
 
-    background:
-        radial-gradient(circle at top,#2b183d 0%,#17253b 35%,#090910 100%);
 
-    color:white;
-
-    min-height:100vh;
-
-    display:flex;
-    justify-content:center;
-    align-items:center;
-
-    overflow-x:hidden;
+\
+.search-box::placeholder {
+  color: #00c828ff;
 }
 
 
 
-.container{
-
-    position:relative;
-
-    width:90%;
-    max-width:960px;
-
-    text-align:center;
-
-    padding:60px;
-
-    overflow:hidden;
-
-    border-radius:28px;
-
-    background:rgba(24,26,40,.82);
-
-    backdrop-filter:blur(12px);
-
-    border:1px solid rgba(255,255,255,.12);
-
-    box-shadow:
-        0 0 40px rgba(180,140,255,.12),
-        0 0 50px rgba(180,225,255,.08),
-        0 0 60px rgba(120,255,180,.08);
+.nav-button:hover {
+  transform: translateY(-2px) scale(1.05);
+  background: linear-gradient(135deg, #d8ffdeff, #7bff82ff);
+  box-shadow: 0 0 22px rgba(120, 255, 131, 0.55);
 }
 
-
-.title{
-
-    font-size:4rem;
-
-    font-weight:900;
-
-    margin-bottom:22px;
-
-
-
-    background-size:300%;
-
-    -webkit-background-clip:text;
-
-    animation:gemFlow 8s linear infinite;
+.flex-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 22px;
+  padding: 25px;
 }
 
-
-
-
-.subtitle{
-
-    font-size:1.2rem;
-
-    line-height:1.8;
-
-    color:#e7ebff;
-
-    max-width:800px;
-
-    margin:auto;
-
-    margin-bottom:50px;
+.game-link {
+  text-decoration: none;
 }
 
+.game-tile {
+  width: 190px;
+  padding: 10px;
+  text-align: center;
 
+  
 
-.button-grid{
+  transition: .25s ease;
 
-    display:grid;
-
-    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-
-    gap:22px;
+  position: relative;
+  overflow: hidden;
 }
 
-.ecog-button{
+.game-tile::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
 
-    text-decoration:none;
+  background:
+      radial-gradient(circle,
+      rgba(88, 208, 73, 0.22),
+      transparent 65%);
 
-    color:white;
-
-    padding:22px;
-
-    border-radius:18px;
-
-
-    background:linear-gradient(
-        135deg,
-        rgba(170, 255, 173, 0.65),
-        rgba(185, 255, 197, 0.65)
-    );
-
-    box-shadow:
-        0 8px 20px rgba(180,180,255,.15);
+  transform: rotate(25deg);
+  opacity: 0;
+  transition: .3s;
 }
 
-.ecog-button:hover{
-
-    transform:translateY(-6px) scale(1.05);
-
-    background:linear-gradient(
-        135deg,
-        rgba(211, 255, 205, 0.85),
-        rgba(170,255,195,.80)
-    );
-
-    box-shadow:
-        0 0 24px rgba(220, 255, 222, 0.2),
-        0 0 28px rgba(153, 255, 150, 0.15);
+.game-tile:hover::before {
+  opacity: 1;
 }
 
-.ecog-button span{
-
-    display:block;
-
-    margin-top:8px;
-
-    font-size:.92rem;
-
-    opacity:.82;
+.game-tile:hover {
+  transform: translateY(-6px) scale(1.05);
+  border-color: rgba(163, 255, 140, 0.45);
+  box-shadow:
+      0 0 25px rgba(110, 255, 122, 0.28),
+      0 0 40px rgba(82, 220, 70, 0.18);
 }
 
+.game-icon {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
 
-/* ==========================
-   footer
-========================== */
+  border-radius: 12px;
+  border: 2px solid rgba(48, 232, 63, 0.12);
 
-.footer{
-
-    margin-top:40px;
-
-    color:#c9d8f0;
-
-    font-size:.9rem;
-
-    opacity:.8;
+  transition: .25s;
 }
+
+.game-tile:hover .game-icon {
+  border-color: rgba(58, 223, 99, 0.45);
+}
+
+.game-title {
+  margin-top: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #e6ffe5ff;
+}
+
+.popular {
+  border: 1px solid #a4ff9cff;
+  box-shadow: 0 0 18px rgba(86, 234, 73, 0.35);
+}
+
 </style>
+  
 </head>
 
 <body>
 
-<div class="container">
+<div id="flashPopup" class="flash-popup">
 
-    <div class="title">
-        POG SITES
-    </div>
+  <div class="flash-popup-box">
 
-    <div class="subtitle">
-        Welcome to POG Sites! The ultimate website for over
-        <b>400 Flash games</b>, and over
-        <b>150 other games</b>!
-        Including basic web games, emulator games,
-        AI games, and other cool projects created by our devs!
-    </div>
+    <h1 class="flash-title">POG Sites</h1>
 
-    <div class="button-grid">
+    <p class="flash-desc">
+      Welcome to POG Sites! The ultimate collection of over 600 games by MTKSIKM!  
+      Please join the 
+      <a href="https://docs.google.com/document/d/1qLyKvXo3Ed605YzdAWZjtgIXsbjtD3BDLIWozPZMRU4/" target="_blank" class="flash-link">Discord</a> 
+      to help support us! We are currently trying to get more games, so stay tuned!
+    </p>
 
-        <a href="uhed.html" class="ecog-button extra-button">
-             Games
-        </a>
+    <button class="flash-button" onclick="closeFlashPopup()">Play!</button>
 
-        <a href="otherfiles.html" class="ecog-button extra-button">
-            Extra Files
-        </a>
-        
-    <a href="music.html" class="ecog-button extra-button">
-            Video Game Soundtracks
-        </a>
-        
+  </div>
 
-    </div>
-
-    <div class="footer">
-        POG Sites • By iKingMugz
-    </div>
-
-   <div class="footer">
-       Join the 
-      <a href="https://docs.google.com/document/d/1qLyKvXo3Ed605YzdAWZjtgIXsbjtD3BDLIWozPZMRU4/" target="_blank" class="flash-link">Discord!</a> 
-    </div>
-   
 </div>
+  
+<style>
+
+
+.navbar {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.nav-button {
+    padding: 12px 20px;
+    margin: 10px;
+
+    background: linear-gradient(135deg, #80ff6cff);
+    color: white;
+    font-weight: nonw;
+    text-decoration: none;
+    
+}
+
+.nav-button:hover {
+    transform: translateY(-3px) scale(1.05);
+
+    background: linear-gradient(
+        135deg,
+        #d8ffddff,
+        #92ffa8ff
+    );
+
+    box-shadow:
+        0 0 20px rgba(147, 255, 120, 0.45),
+        0 0 35px rgba(80, 220, 94, 0.25);
+}
+
+
+
+.flash-popup {
+    position: fixed;
+    inset: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: rgba(4, 15, 5, 0.88);
+    backdrop-filter: blur(10px);
+
+    z-index: 9999;
+}
+
+
+.flash-popup-box {
+
+    width: 80%;
+    max-width: 650px;
+
+    padding: 42px;
+
+    text-align: center;
+
+    border-radius: 22px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(30, 78, 52, 0.95),
+            rgba(12, 40, 15, 0.95)
+        );
+
+    border: 1px solid rgba(180, 255, 195, 0.25);
+
+
+  
+
+.flash-button:hover {
+
+    transform: translateY(-3px) scale(1.05);
+
+    background: linear-gradient(
+        135deg,
+        #d8ffd8ff,
+        #a1ff92ff
+    );
+
+    box-shadow:
+        0 0 25px rgba(127, 255, 120, 0.45);
+}
+  
+</style>
+
+<div class="navbar">
+    <a href="index.html" class="nav-button">Back Home</a>
+</div>
+
+
+
+<div class="navbar">
+  <div class="logo">POG Sites</div>
+  <input type="text" id="search" class="search-box" placeholder="Search games...">
+</div>
+
+
+<div class="flex-container" id="gameContainer">
+
+<a href="flash/1on1soccer/1on1soccer.html" class="game-link">
+<div class="game-tile">
+<img src="flash/1on1soccer/1on1.webp" class="game-icon">
+<div class="game-title">1 on 1 Soccer</div>
+</div></a>
+
+<a href="flash/3dtanks/3dtanks.html" class="game-link">
+<div class="game-tile">
+<img src="flash/3dtanks/images.jpeg" class="game-icon">
+<div class="game-title">3D Tanks</div>
+</div></a>
+
+<a href="flash/abobosbigadventure/abobosbigadventure.html" class="game-link">
+<div class="game-tile">
+<img src="flash/abobosbigadventure/abobosbigadventure.png" class="game-icon">
+<div class="game-title">Abobo's Big Adventure</div>
+</div></a>
+
+<a href="flash/achievementunlocked/achievementunlocked.html" class="game-link">
+<div class="game-tile">
+<img src="flash/achievementunlocked/achievementunlocked.png" class="game-icon">
+<div class="game-title">Achievement Unlocked</div>
+</div></a>
+
+<a href="flash/achievementunlocked2/achievementunlocked2.html" class="game-link">
+<div class="game-tile">
+<img src="flash/achievementunlocked2/achievementunlocked.png" class="game-icon">
+<div class="game-title">Achievement Unlocked 2</div>
+</div></a>
+
+<a href="flash/achievementunlocked3/achievementunlocked3.html" class="game-link">
+<div class="game-tile">
+<img src="flash/achievementunlocked3/sdcdss.jpeg" class="game-icon">
+<div class="game-title">Achievement Unlocked 3</div>
+</div></a>
+
+<a href="flash/actionturnip/actionturnip.html" class="game-link">
+<div class="game-tile">
+<img src="flash/actionturnip/actionturnip.png" class="game-icon">
+<div class="game-title">Action Turnip</div>
+</div></a>
+
+<a href="flash/adaran/adaran.html" class="game-link">
+<div class="game-tile">
+<img src="flash/adaran/adaran.png" class="game-icon">
+<div class="game-title">Adaran</div>
+</div></a>
+
+<a href="flash/adrenaline/adrenaline.html" class="game-link">
+<div class="game-tile">
+<img src="flash/adrenaline/adrenaline.png" class="game-icon">
+<div class="game-title">Adrenaline</div>
+</div></a>
+
+<a href="flash/ageofwar/ageofwar.html" class="game-link">
+<div class="game-tile">
+<img src="flash/ageofwar/ageofwar.png" class="game-icon">
+<div class="game-title">Age Of War</div>
+</div></a>
+
+<a href="flash/ageofwar2/ageofwar2.html" class="game-link">
+<div class="game-tile">
+<img src="flash/ageofwar2/ageofwar2.png" class="game-icon">
+<div class="game-title">Age Of War 2</div>
+</div></a>
+
+<a href="flash/americanracing1/americanracing1.html" class="game-link">
+<div class="game-tile">
+<img src="flash/americanracing1/americanracing1.png" class="game-icon">
+<div class="game-title">American Racing</div>
+</div></a>
+
+<a href="flash/americanracing2/americanracing2.html" class="game-link">
+<div class="game-tile">
+<img src="flash/americanracing2/americanracing2.png" class="game-icon">
+<div class="game-title">American Racing 2</div>
+</div></a>
+
+<a href="flash/AngryBirds/angrybirds.html" class="game-link">
+<div class="game-tile">
+<img src="flash/AngryBirds/angy.png" class="game-icon">
+<div class="game-title">Angry Birds</div>
+</div></a>
+  
+<a href="flash/arkandianrevenant/arkandianrevenant.html" class="game-link">
+<div class="game-tile">
+<img src="flash/arkandianrevenant/arkandianrevenant.png" class="game-icon">
+<div class="game-title">Arkandian Revenant</div>
+</div></a>
+
+<a href="flash/armyofages/armyofages.html" class="game-link">
+<div class="game-tile">
+<img src="flash/armyofages/armyofages.png" class="game-icon">
+<div class="game-title">Army Of Ages</div>
+</div></a>
+
+<a href="flash/awesomecars/awesomecars.html" class="game-link">
+<div class="game-tile">
+<img src="flash/awesomecars/awesomecars.jpg" class="game-icon">
+<div class="game-title">Awesome Cars</div>
+</div></a>
+
+<a href="flash/awesomeplanes/awesomeplanes.html" class="game-link">
+<div class="game-tile">
+<img src="flash/awesomeplanes/awesomeplanes.png" class="game-icon">
+<div class="game-title">Awesome Planes</div>
+</div></a>
+
+<a href="flash/bashthecomputer/computerbashing.html" class="game-link">
+<div class="game-tile">
+<img src="flash/bashthecomputer/computerbashing.png" class="game-icon">
+<div class="game-title">Bash The Computer</div>
+</div></a>
+
+<a href="flash/BasketballLegends/BasketballLegends.html" class="game-link">
+<div class="game-tile">
+<img src="flash/BasketballLegends/basketball legends.png" class="game-icon">
+<div class="game-title">Basketball Legends</div>
+</div></a>
+
+<a href="flash/battlepanic/battlepanic.html" class="game-link">
+<div class="game-tile">
+<img src="flash/battlepanic/battlepanic.png" class="game-icon">
+<div class="game-title">Battle Panic</div>
+</div></a>
+
+<a href="flash/bloonsplayerpack2/bloonsplayerpack2.html" class="game-link">
+<div class="game-tile">
+<img src="flash/bloonsplayerpack2/bloonsplayerpack2.png" class="game-icon">
+<div class="game-title">Bloons Player Pack 2</div>
+</div></a>
+
+<a href="flash/bloonsplayerpack3/bloonsplayerpack3.html" class="game-link">
+<div class="game-tile">
+<img src="flash/bloonsplayerpack3/bloonsplayerpack3.png" class="game-icon">
+<div class="game-title">Bloons Player Pack 3</div>
+</div></a>
+
+<a href="flash/bloonsplayerpack4/bloonsplayerpack4.html" class="game-link">
+<div class="game-tile">
+<img src="flash/bloonsplayerpack4/bloonsplayerpack4.png" class="game-icon">
+<div class="game-title">Bloons Player Pack 4</div>
+</div></a>
+
+<a href="flash/bloonsplayerpack5/bloonsplayerpack5.html" class="game-link">
+<div class="game-tile">
+<img src="flash/bloonsplayerpack5/bloonsplayerpack5.png" class="game-icon">
+<div class="game-title">Bloons Player Pack 5</div>
+</div></a>
+
+<a href="flash/BloonsTD/Bloons TD.html" class="game-link">
+<div class="game-tile">
+<img src="flash/BloonsTD/bloonstd.jpeg" class="game-icon">
+<div class="game-title">Bloons TD</div>
+</div></a>
+  
+<a href="flash/bloonstd3/bloonstd3.html" class="game-link">
+<div class="game-tile">
+<img src="flash/bloonstd3/bloonstd3.png" class="game-icon">
+<div class="game-title">Bloons TD 3</div>
+</div></a>
+
+<a href="flash/bloonstd4/bloonstd4.html" class="game-link">
+<div class="game-tile">
+<img src="flash/bloonstd4/bloonstd4.png" class="game-icon">
+<div class="game-title">Bloons TD 4</div>
+</div></a>
+
+<a href="flash/bloonstd5/bloonstd5.html" class="game-link">
+<div class="game-tile">
+<img src="flash/bloonstd5/bloonstd5.jpeg" class="game-icon">
+<div class="game-title">Bloons TD 5</div>
+</div></a>
+
+<a href="flash/bobtherobber/bobtherobber.html" class="game-link">
+<div class="game-tile">
+<img src="flash/bobtherobber/bobtherobber.jpeg" class="game-icon">
+<div class="game-title">Bob The Robber</div>
+</div></a>
+
+<a href="flash/boombot2/boombot2.html" class="game-link">
+<div class="game-tile">
+<img src="flash/boombot2/boombot2.png" class="game-icon">
+<div class="game-title">Boom Bot 2</div>
+</div></a>
+
+<a href="flash/boxhead2play/boxhead2play.html" class="game-link">
+<div class="game-tile">
+<img src="flash/boxhead2play/boxhead2play.jpeg" class="game-icon">
+<div class="game-title">Boxhead 2 Play</div>
+</div></a>
+
+<a href="flash/breakingthebank/breakingthebank.html" class="game-link">
+<div class="game-tile">
+<img src="flash/breakingthebank/breakingthebank.png" class="game-icon">
+<div class="game-title">Breaking The Bank</div>
+</div></a>
+
+<a href="flash/bubbletanks2/bubbletanks2.html" class="game-link">
+<div class="game-tile">
+<img src="flash/bubbletanks2/bubbletanks2.png" class="game-icon">
+<div class="game-title">Bubble Tanks 2</div>
+</div></a>
+
+<a href="flash/bulletbill/bulletbill.html" class="game-link">
+<div class="game-tile">
+<img src="flash/bulletbill/bulletbill.png" class="game-icon">
+<div class="game-title">Bullet Bill</div>
+</div></a>
+
+<a href="flash/bullettimefighting/bullettimefighting.html" class="game-link">
+<div class="game-tile">
+<img src="flash/bullettimefighting/bullettimefighting.jpg" class="game-icon">
+<div class="game-title">Bullet Time Fighting</div>
+</div></a>
+
+<a href="flash/burritobison/burritobison.html" class="game-link">
+<div class="game-tile">
+<img src="flash/burritobison/burritobison.png" class="game-icon">
+<div class="game-title">Burrito Bison</div>
+</div></a>
+
+<a href="flash/burritobisonrevenge/burritobisonrevenge.html" class="game-link">
+<div class="game-tile">
+<img src="flash/burritobisonrevenge/burritobisonrevenge.png" class="game-icon">
+<div class="game-title">Burrito Bison Revenge</div>
+</div></a>
+
+<a href="flash/cactusmccoy/cactusmccoy.html" class="game-link">
+<div class="game-tile">
+<img src="flash/cactusmccoy/cactusmccoy.ico" class="game-icon">
+<div class="game-title">Cactus McCoy</div>
+</div></a>
+
+<a href="flash/cactusmccoy2/cactusmccoy2.html" class="game-link">
+<div class="game-tile">
+<img src="flash/cactusmccoy2/cactusmccoy2.png" class="game-icon">
+<div class="game-title">Cactus McCoy 2</div>
+</div></a>
+
+<a href="flash/cannonbasketball2/cannonbasketball2.html" class="game-link">
+<div class="game-tile">
+<img src="flash/cannonbasketball2/cannonbasketball2.png" class="game-icon">
+<div class="game-title">Cannon Basketball 2</div>
+</div></a>
+
+<a href="flash/cargobridge/cargobridge.html" class="game-link">
+<div class="game-tile">
+<img src="flash/cargobridge/cargobridge.jpg" class="game-icon">
+<div class="game-title">Cargo Bridge</div>
+</div></a>
+
+<a href="flash/causality/causality.html" class="game-link">
+<div class="game-tile">
+<img src="flash/causality/causality.jpg" class="game-icon">
+<div class="game-title">Causality</div>
+</div></a>
+
+<a href="flash/chibiknight/chibiknight.html" class="game-link">
+<div class="game-tile">
+<img src="flash/chibiknight/chibiknight.png" class="game-icon">
+<div class="game-title">Chibi Knight</div>
+</div></a>
+
+<a href="flash/clickerheroes/clickerheroes.html" class="game-link">
+<div class="game-tile">
+<img src="flash/clickerheroes/clickerheroes.png" class="game-icon">
+<div class="game-title">Clicker Heroes</div>
+</div></a>
+
+<a href="flash/crushthecastle/crushthecastle.html" class="game-link">
+<div class="game-tile">
+<img src="flash/crushthecastle/crushthecastle.png" class="game-icon">
+<div class="game-title">Crush The Castle</div>
+</div></a>
+
+<a href="flash/crushthecastle2/crushthecastle2.html" class="game-link">
+<div class="game-tile">
+<img src="flash/crushthecastle2/crushthecastle2.png" class="game-icon">
+<div class="game-title">Crush The Castle 2</div>
+</div></a>
+
+<a href="flash/cubefield/cubefield.html" class="game-link">
+<div class="game-tile">
+<img src="flash/cubefield/cubefield.jpeg" class="game-icon">
+<div class="game-title">Cubefield</div>
+</div></a>
+
+<a href="flash/cyclomaniacs2/cyclomaniacs2.html" class="game-link">
+<div class="game-tile">
+<img src="flash/cyclomaniacs2/cyclomaniacs2.jpeg" class="game-icon">
+<div class="game-title">Cyclomaniacs 2</div>
+</div></a>
+
+<a href="flash/dadnme/dadnme.html" class="game-link">
+<div class="game-tile">
+<img src="flash/dadnme/dadnme.png" class="game-icon">
+<div class="game-title">Dad N Me</div>
+</div></a>
+
+<a href="flash/diggy/diggy.html" class="game-link">
+<div class="game-tile">
+<img src="flash/diggy/diggy.jpg" class="game-icon">
+<div class="game-title">Diggy</div>
+</div></a>
+
+<a href="flash/donkeykong/donkeykong(FLASH).html" class="game-link">
+<div class="game-tile">
+<img src="flash/donkeykong/donkeykong.png" class="game-icon">
+<div class="game-title">Donkey Kong</div>
+</div></a>
+
+<a href="flash/dontshootthepuppy/dontshootthepuppy.html" class="game-link">
+<div class="game-tile">
+<img src="flash/dontshootthepuppy/dontshootthepuppy.png" class="game-icon">
+<div class="game-title">Don't Shoot The Puppy</div>
+</div></a>
+
+<a href="flash/doodledefender/doodledefender.html" class="game-link">
+<div class="game-tile">
+<img src="flash/doodledefender/doodledefender.png" class="game-icon">
+<div class="game-title">Doodle Defender</div>
+</div></a>
+
+<a href="flash/doom/doom(FLASH).html" class="game-link">
+<div class="game-tile">
+<img src="flash/doom/doomflash.png" class="game-icon">
+<div class="game-title">Doom</div>
+</div></a>
+
+<a href="flash/dragracing/dragracing.html" class="game-link">
+<div class="game-tile">
+<img src="flash/dragracing/dragracing.png" class="game-icon">
+<div class="game-title">Drag Racing</div>
+</div></a>
+
+<a href="flash/ducklife/ducklife.html" class="game-link">
+<div class="game-tile">
+<img src="flash/ducklife/ducklife.png" class="game-icon">
+<div class="game-title">Duck Life</div>
+</div></a>
+
+<a href="flash/ducklife2/ducklife2.html" class="game-link">
+<div class="game-tile">
+<img src="flash/ducklife2/ducklife2.jpeg" class="game-icon">
+<div class="game-title">Duck Life 2</div>
+</div></a>
+
+<a href="flash/ducklife3/ducklife3.html" class="game-link">
+<div class="game-tile">
+<img src="flash/ducklife3/ducklife3.jpeg" class="game-icon">
+<div class="game-title">Duck Life 3</div>
+</div></a>
+
+<a href="flash/ducklife4/ducklife4.html" class="game-link">
+<div class="game-tile">
+<img src="flash/ducklife4/ducklife4.png" class="game-icon">
+<div class="game-title">Duck Life 4</div>
+</div></a>
+
+<a href="flash/earntodie/earntodie.html" class="game-link">
+<div class="game-tile">
+<img src="flash/earntodie/earntodie.png" class="game-icon">
+<div class="game-title">Earn To Die</div>
+</div></a>
+
+<a href="flash/EarnToDie2/EarnToDie2.html" class="game-link">
+<div class="game-tile">
+<img src="flash/EarnToDie2/earntodie2.png" class="game-icon">
+<div class="game-title">Earn To Die 2</div>
+</div></a>
+  
+<a href="flash/electricman2/electricman2.html" class="game-link">
+<div class="game-tile">
+<img src="flash/electricman2/electricman2.png" class="game-icon">
+<div class="game-title">Electric Man 2</div>
+</div></a>
+
+<a href="flash/elephantquest/elephantquest.html" class="game-link">
+<div class="game-tile">
+<img src="flash/elephantquest/elephantquest.png" class="game-icon">
+<div class="game-title">Elephant Quest</div>
+</div></a>
+
+<a href="flash/epiccomboredux/epiccomboredux.html" class="game-link">
+<div class="game-tile">
+<img src="flash/epiccomboredux/epiccomboredux.png" class="game-icon">
+<div class="game-title">Epic Combo Redux</div>
+</div></a>
+
+<a href="flash/escapingtheprison/escapingtheprison.html" class="game-link">
+<div class="game-tile">
+<img src="flash/escapingtheprison/escapingtheprison.jpg" class="game-icon">
+<div class="game-title">Escaping The Prison</div>
+</div></a>
+
+<a href="flash/espnarcadebaseball/espnarcadebaseball.html" class="game-link">
+<div class="game-tile">
+<img src="flash/espnarcadebaseball/espnarcadebaseball.jpeg" class="game-icon">
+<div class="game-title">ESPN Arcade Baseball</div>
+</div></a>
+
+<a href="flash/exitpath/exitpath.html" class="game-link">
+<div class="game-tile">
+<img src="flash/exitpath/exitpath.jpg" class="game-icon">
+<div class="game-title">Exit Path</div>
+</div></a>
+
+<a href="flash/factoryballs/factoryballs2.html" class="game-link">
+<div class="game-tile">
+<img src="flash/factoryballs/factoryballs.png" class="game-icon">
+<div class="game-title">Factory Balls</div>
+</div></a>
+
+<a href="flash/factoryballs2/factoryballs2.html" class="game-link">
+<div class="game-tile">
+<img src="flash/factoryballs2/factoryballs2.png" class="game-icon">
+<div class="game-title">Factory Balls 2</div>
+</div></a>
+
+<a href="flash/factoryballs3/factoryballs3.html" class="game-link">
+<div class="game-tile">
+<img src="flash/factoryballs3/factoryballs3.png" class="game-icon">
+<div class="game-title">Factory Balls 3</div>
+</div></a>
+
+<a href="flash/factoryballs4/factoryballs4.html" class="game-link">
+<div class="game-tile">
+<img src="flash/factoryballs4/factoryballs.jpeg" class="game-icon">
+<div class="game-title">Factory Balls 4</div>
+</div></a>
+
+<a href="flash/fancypantsadventure/fancypantsadventure.html" class="game-link">
+<div class="game-tile">
+<img src="flash/fancypantsadventure/fancypantsadventure.png" class="game-icon">
+<div class="game-title">Fancy Pants Adventure</div>
+</div></a>
+
+<a href="flash/fancypantsadventure2/fancypantsadventure2.html" class="game-link">
+<div class="game-tile">
+<img src="flash/fancypantsadventure2/fancypantsadventure2.png" class="game-icon">
+<div class="game-title">Fancy Pants Adventure 2</div>
+</div></a>
+
+<a href="flash/flashflightsimulator/flashflightsimulator.html" class="game-link">
+<div class="game-tile">
+<img src="flash/flashflightsimulator/flashflightsimulator.png" class="game-icon">
+<div class="game-title">Flash Flight Simulator</div>
+</div></a>
+
+<a href="flash/flight/flight.html" class="game-link">
+<div class="game-tile">
+<img src="flash/flight/flight.png" class="game-icon">
+<div class="game-title">Flight</div>
+</div></a>
+
+<a href="flash/fracuum/fracuum.html" class="game-link">
+<div class="game-tile">
+<img src="flash/fracuum/fracuum.png" class="game-icon">
+<div class="game-title">Fracuum</div>
+</div></a>
+
+<a href="flash/freerider2/freerider2.html" class="game-link">
+<div class="game-tile">
+<img src="flash/freerider2/freerider2.png" class="game-icon">
+<div class="game-title">Free Rider 2</div>
+</div></a>
+
+<a href="flash/getontop/getontop.html" class="game-link">
+<div class="game-tile">
+<img src="flash/getontop/getontop.png" class="game-icon">
+<div class="game-title">Get On Top</div>
+</div></a>
+
+<a href="gunblood/gunblood.html" class="game-link">
+<div class="game-tile">
+<img src="gunblood/gunblood.png" class="game-icon">
+<div class="game-title">Gun Blood</div>
+</div></a>
+  
+<a href="flash/gunmayhem2moremayhem/gunmayhem2moremayhem(BESTGAME).html" class="game-link">
+<div class="game-tile">
+<img src="flash/gunmayhem2moremayhem/gunmayhem2moremayhem.jpeg" class="game-icon">
+<div class="game-title">Gun Mayhem 2: More Mayhem</div>
+</div></a>
+
+<a href="flash/hanger/hanger.html" class="game-link">
+<div class="game-tile">
+<img src="flash/hanger/hanger.jpeg" class="game-icon">
+<div class="game-title">Hanger</div>
+</div></a>
+
+<a href="flash/hanger2/hanger2.html" class="game-link">
+<div class="game-tile">
+<img src="flash/hanger2/hanger2.png" class="game-icon">
+<div class="game-title">Hanger 2</div>
+</div></a>
+
+<a href="flash/happywheels/happywheels.html" class="game-link">
+<div class="game-tile">
+<img src="flash/happywheels/happywheels.jpeg" class="game-icon">
+<div class="game-title">Happy Wheels</div>
+</div></a>
+
+<a href="flash/hobo/hobo1.html" class="game-link">
+<div class="game-tile">
+<img src="flash/hobo/hobo.png" class="game-icon">
+<div class="game-title">Hobo</div>
+</div></a>
+
+<a href="flash/hobo2/hobo2.html" class="game-link">
+<div class="game-tile">
+<img src="flash/hobo2/hobo2.png" class="game-icon">
+<div class="game-title">Hobo 2</div>
+</div></a>
+
+<a href="flash/hobo3/hobo3.html" class="game-link">
+<div class="game-tile">
+<img src="flash/hobo3/hobo3.png" class="game-icon">
+<div class="game-title">Hobo 3</div>
+</div></a>
+
+<a href="flash/hobo4/hobo4.html" class="game-link">
+<div class="game-tile">
+<img src="flash/hobo4/hobo4.jpeg" class="game-icon">
+<div class="game-title">Hobo 4</div>
+</div></a>
+
+<a href="flash/hobo5/hobo5.html" class="game-link">
+<div class="game-tile">
+<img src="flash/hobo5/hobo5.jpeg" class="game-icon">
+<div class="game-title">Hobo 5</div>
+</div></a>
+
+<a href="flash/hobo6/hobo6.html" class="game-link">
+<div class="game-tile">
+<img src="flash/hobo6/hobo6.jpeg" class="game-icon">
+<div class="game-title">Hobo 6</div>
+</div></a>
+
+<a href="flash/hobo7/hobo7.html" class="game-link">
+<div class="game-tile">
+<img src="flash/hobo7/hobo7.png" class="game-icon">
+<div class="game-title">Hobo 7</div>
+</div></a>
+
+<a href="flash/interactivebuddy/interactivebuddy.html" class="game-link">
+<div class="game-tile">
+<img src="flash/interactivebuddy/interactivebuddy.png" class="game-icon">
+<div class="game-title">Interactive Buddy</div>
+</div></a>
+
+<a href="flash/jacksmith/jacksmith.html" class="game-link">
+<div class="game-tile">
+<img src="flash/jacksmith/jacksmith.jpeg" class="game-icon">
+<div class="game-title">Jacksmith</div>
+</div></a>
+
+<a href="flash/jellytruck/jellytruck.html" class="game-link">
+<div class="game-tile">
+<img src="flash/jellytruck/jellytruck.png" class="game-icon">
+<div class="game-title">Jelly Truck</div>
+</div></a>
+
+<a href="flash/johnnyupgrade/johnnyupgrade.html" class="game-link">
+<div class="game-tile">
+<img src="flash/johnnyupgrade/johnnyupgrade.jpeg" class="game-icon">
+<div class="game-title">Johnny Upgrade</div>
+</div></a>
+
+<a href="flash/jumpix2/jumpix2.html" class="game-link">
+<div class="game-tile">
+<img src="flash/jumpix2/jumpix2.png" class="game-icon">
+<div class="game-title">Jumpix 2</div>
+</div></a>
+
+<a href="flash/knightmaretower/knightmaretower.html" class="game-link">
+<div class="game-tile">
+<img src="flash/knightmaretower/knightmaretower.png" class="game-icon">
+<div class="game-title">Knightmare Tower</div>
+</div></a>
+
+<a href="flash/learntofly/learntofly.html" class="game-link">
+<div class="game-tile">
+<img src="flash/learntofly/learntofly.png" class="game-icon">
+<div class="game-title">Learn To Fly</div>
+</div></a>
+
+<a href="flash/learntofly2/learntofly2.html" class="game-link">
+<div class="game-tile">
+<img src="flash/learntofly2/learntofly2.webp" class="game-icon">
+<div class="game-title">Learn To Fly 2</div>
+</div></a>
+
+<a href="flash/learntofly3/learntofly3.html" class="game-link">
+<div class="game-tile">
+<img src="flash/learntofly3/learntofly3.png" class="game-icon">
+<div class="game-title">Learn To Fly 3</div>
+</div></a>
+  
+<a href="flash/magnetface/magnetface.html" class="game-link">
+<div class="game-tile">
+<img src="flash/magnetface/magnetface.jpg" class="game-icon">
+<div class="game-title">Magnet Face</div>
+</div></a>
+
+<a href="flash/mariocombat/mariocombat.html" class="game-link">
+<div class="game-tile">
+<img src="flash/mariocombat/mariocombat.jpeg" class="game-icon">
+<div class="game-title">Mario Combat</div>
+</div></a>
+
+<a href="flash/marioracingtournament/marioracingtournament.html" class="game-link">
+<div class="game-tile">
+<img src="flash/marioracingtournament/marioracingtournament.png" class="game-icon">
+<div class="game-title">Mario Racing Tournament</div>
+</div></a>
+
+<a href="flash/meatboy/meatboy.html" class="game-link">
+<div class="game-tile">
+<img src="flash/meatboy/meatboy.jpg" class="game-icon">
+<div class="game-title">Meat Boy</div>
+</div></a>
+
+<a href="flash/megamanprojectx/megamanprojectx.html" class="game-link">
+<div class="game-tile">
+<img src="flash/megamanprojectx/megamanprojectx.png" class="game-icon">
+<div class="game-title">Mega Man Project X</div>
+</div></a>
+
+<a href="flash/metroidelements/metroidelements.html" class="game-link">
+<div class="game-tile">
+<img src="flash/metroidelements/metroidelements.png" class="game-icon">
+<div class="game-title">Metroid Elements</div>
+</div></a>
+
+<a href="flash/mineblocks/mineblocks.html" class="game-link">
+<div class="game-tile">
+<img src="flash/mineblocks/mineblocks.png" class="game-icon">
+<div class="game-title">Mine Blocks</div>
+</div></a>
+
+<a href="flash/minesweeper/minesweeper.html" class="game-link">
+<div class="game-tile">
+<img src="flash/minesweeper/minesweeper.png" class="game-icon">
+<div class="game-title">Minesweeper</div>
+</div></a>
+
+<a href="flash/mirrorsedge/mirrorsedge.html" class="game-link">
+<div class="game-tile">
+<img src="flash/mirrorsedge/mirrorsedge.png" class="game-icon">
+<div class="game-title">Mirror's Edge</div>
+</div></a>
+
+<a href="flash/moneymovers/moneymovers.html" class="game-link">
+<div class="game-tile">
+<img src="flash/moneymovers/moneymovers.jpg" class="game-icon">
+<div class="game-title">Money Movers</div>
+</div></a>
+
+<a href="flash/moneymovers3/moneymovers3.html" class="game-link">
+<div class="game-tile">
+<img src="flash/moneymovers3/moneymovers.jpeg" class="game-icon">
+<div class="game-title">Money Movers 3</div>
+</div></a>
+
+<a href="flash/motherload/motherload.html" class="game-link">
+<div class="game-tile">
+<img src="flash/motherload/motherload.png" class="game-icon">
+<div class="game-title">Motherload</div>
+</div></a>
+
+<a href="flash/motox3m/motox3m.html" class="game-link">
+<div class="game-tile">
+<img src="flash/motox3m/motox3m.png" class="game-icon">
+<div class="game-title">Moto X3M</div>
+</div></a>
+
+<a href="flash/multitask/multitask.html" class="game-link">
+<div class="game-tile">
+<img src="flash/multitask/multitask.jpeg" class="game-icon">
+<div class="game-title">Multitask</div>
+</div></a>
+
+<a href="flash/mutilateadoll2/mutilateadoll2.html" class="game-link">
+<div class="game-tile">
+<img src="flash/mutilateadoll2/mutilateadoll2.png" class="game-icon">
+<div class="game-title">Mutilate A Doll 2</div>
+</div></a>
+
+<a href="flash/myangel/myangel.html" class="game-link">
+<div class="game-tile">
+<img src="flash/myangel/myangel.png" class="game-icon">
+<div class="game-title">My Angel</div>
+</div></a>
+
+<a href="flash/n/ngame.html" class="game-link">
+<div class="game-tile">
+<img src="flash/n/n.png" class="game-icon">
+<div class="game-title">N</div>
+</div></a>
+
+<a href="flash/nanotube/nanotube.html" class="game-link">
+<div class="game-tile">
+<img src="flash/nanotube/nanotube.png" class="game-icon">
+<div class="game-title">Nanotube</div>
+</div></a>
+
+<a href="flash/newgroundsrumble/newgroundsrumble.html" class="game-link">
+<div class="game-tile">
+<img src="flash/newgroundsrumble/newgroundsrumble.png" class="game-icon">
+<div class="game-title">Newgrounds Rumble</div>
+</div></a>
+
+<a href="flash/nucleus/nucleus.html" class="game-link">
+<div class="game-tile">
+<img src="flash/nucleus/nucleus.png" class="game-icon">
+<div class="game-title">Nucleus</div>
+</div></a>
+
+<a href="flash/nv2/nv2.html" class="game-link">
+<div class="game-tile">
+<img src="flash/nv2/nv2.png" class="game-icon">
+<div class="game-title">NV2</div>
+</div></a>
+
+<a href="flash/nyancatlostinspace/nyancatlostinspace.html" class="game-link">
+<div class="game-tile">
+<img src="flash/nyancatlostinspace/nyancatlostinspace.png" class="game-icon">
+<div class="game-title">Nyan Cat Lost In Space</div>
+</div></a>
+
+<a href="flash/offroaders/offroaders.html" class="game-link">
+<div class="game-tile">
+<img src="flash/offroaders/offroaders.png" class="game-icon">
+<div class="game-title">Offroaders</div>
+</div></a>
+
+<a href="flash/onemanarmy2/onemanarmy2.html" class="game-link">
+<div class="game-tile">
+<img src="flash/onemanarmy2/onemanarmy2.png" class="game-icon">
+<div class="game-title">One Man Army 2</div>
+</div></a>
+
+<a href="flash/outofthisworld/outofthisworld.html" class="game-link">
+<div class="game-tile">
+<img src="flash/outofthisworld/outofthisworld.png" class="game-icon">
+<div class="game-title">Out Of This World</div>
+</div></a>
+
+<a href="flash/pacman/pacman(FLASH).html" class="game-link">
+<div class="game-tile">
+<img src="flash/pacman/pacman.png" class="game-icon">
+<div class="game-title">Pac-Man</div>
+</div></a>
+
+<a href="flash/pandemic/pandemic.html" class="game-link">
+<div class="game-tile">
+<img src="flash/pandemic/pandemic.png" class="game-icon">
+<div class="game-title">Pandemic</div>
+</div></a>
+
+<a href="flash/pandemic2/pandemic2.html" class="game-link">
+<div class="game-tile">
+<img src="flash/pandemic2/pandemic2.png" class="game-icon">
+<div class="game-title">Pandemic 2</div>
+</div></a>
+
+<a href="flash/papalouie/papalouie.html" class="game-link">
+<div class="game-tile">
+<img src="flash/papalouie/papalouie.png" class="game-icon">
+<div class="game-title">Papa Louie</div>
+</div></a>
+
+<a href="flash/papalouie2/papalouie2.html" class="game-link">
+<div class="game-tile">
+<img src="flash/papalouie2/papalouie2.png" class="game-icon">
+<div class="game-title">Papa Louie 2</div>
+</div></a>
+
+<a href="flash/papalouie3/papalouie3.html" class="game-link">
+<div class="game-tile">
+<img src="flash/papalouie3/papalouie3.png" class="game-icon">
+<div class="game-title">Papa Louie 3</div>
+</div></a>
+
+<a href="flash/picosschool/picosschool.html" class="game-link">
+<div class="game-tile">
+<img src="flash/picosschool/picosschool.png" class="game-icon">
+<div class="game-title">Pico's School</div>
+</div></a>
+
+<a href="flash/picosschool2/picosschool2.html" class="game-link">
+<div class="game-tile">
+<img src="flash/picosschool2/picosschool2.png" class="game-icon">
+<div class="game-title">Pico's School 2</div>
+</div></a>
+
+<a href="flash/polarjump/polarjump.html" class="game-link">
+<div class="game-tile">
+<img src="flash/polarjump/polarjump.png" class="game-icon">
+<div class="game-title">Polar Jump</div>
+</div></a>
+
+<a href="flash/pong/pong.html" class="game-link">
+<div class="game-tile">
+<img src="flash/pong/pong.png" class="game-icon">
+<div class="game-title">Pong</div>
+</div></a>
+
+<a href="flash/portal/portal.html" class="game-link">
+<div class="game-tile">
+<img src="flash/portal/portal.png" class="game-icon">
+<div class="game-title">Portal</div>
+</div></a>
+
+<a href="flash/portal2d/portal2d.html" class="game-link">
+<div class="game-tile">
+<img src="flash/portal2d/portal2d.png" class="game-icon">
+<div class="game-title">Portal 2D</div>
+</div></a>
+
+<a href="flash/qubeythecube/qubeythecube.html" class="game-link">
+<div class="game-tile">
+<img src="flash/qubeythecube/qubeythecube.png" class="game-icon">
+<div class="game-title">Qubey The Cube</div>
+</div></a>
+
+<a href="flash/qwop/qwop.html" class="game-link">
+<div class="game-tile">
+<img src="flash/qwop/qwop.png" class="game-icon">
+<div class="game-title">QWOP</div>
+</div></a>
+
+<a href="flash/raftwars/raftwars.html" class="game-link"><div class="game-tile"><img src="flash/raftwars/raftwars.png" class="game-icon"><div class="game-title">Raft Wars</div></div></a>
+
+<a href="flash/raftwars2/raftwars2.html" class="game-link"><div class="game-tile"><img src="flash/raftwars2/raftwars2.png" class="game-icon"><div class="game-title">Raft Wars 2</div></div></a>
+
+<a href="flash/raze/raze.html" class="game-link"><div class="game-tile"><img src="flash/raze/raze.png" class="game-icon"><div class="game-title">Raze</div></div></a>
+
+<a href="flash/redball/redball.html" class="game-link"><div class="game-tile"><img src="flash/redball/red1.png" class="game-icon"><div class="game-title">Red Ball</div></div></a>
+
+<a href="flash/redball2/redball2.html" class="game-link"><div class="game-tile"><img src="flash/redball2/redball2.png" class="game-icon"><div class="game-title">Red Ball 2</div></div></a>
+
+<a href="flash/red-ball-3/index.html" class="game-link"><div class="game-tile"><img src="flash/red-ball-3/red3.png" class="game-icon"><div class="game-title">Red Ball 3</div></div></a>
+  
+<a href="flash/redball4/redball4.html" class="game-link"><div class="game-tile"><img src="flash/redball4/red4.jpg" class="game-icon"><div class="game-title">Red Ball 4</div></div></a>
+
+<a href="flash/redball4vol2/redball4vol2.html" class="game-link"><div class="game-tile"><img src="flash/redball4vol2/4v2.webp" class="game-icon"><div class="game-title">Red Ball 4 Vol. 2</div></div></a>
+
+<a href="flash/redball4vol3/redball4vol3.html" class="game-link"><div class="game-tile"><img src="flash/redball4vol3/v3.webp" class="game-icon"><div class="game-title">Red Ball 4 Vol. 3</div></div></a>
+
+<a href="flash/redshift/redshift.html" class="game-link"><div class="game-tile"><img src="flash/redshift/redshift.png" class="game-icon"><div class="game-title">Redshift</div></div></a>
+
+<a href="flash/revenant2/revenant2.html" class="game-link"><div class="game-tile"><img src="flash/revenant2/revenant2.png" class="game-icon"><div class="game-title">Revenant 2</div></div></a>
+
+<a href="flash/riddleschool1/riddleschool1.html" class="game-link"><div class="game-tile"><img src="flash/riddleschool1/riddleschool1.png" class="game-icon"><div class="game-title">Riddle School</div></div></a>
+
+<a href="flash/riddleschool2/riddleschool2.html" class="game-link"><div class="game-tile"><img src="flash/riddleschool2/riddleschool2.jpg" class="game-icon"><div class="game-title">Riddle School 2</div></div></a>
+
+<a href="flash/riddleschool3/riddleschool3.html" class="game-link"><div class="game-tile"><img src="flash/riddleschool3/riddle-school-3.png" class="game-icon"><div class="game-title">Riddle School 3</div></div></a>
+
+<a href="flash/riddleschool4/riddleschool4.html" class="game-link"><div class="game-tile"><img src="flash/riddleschool4/Riddle-School-4.png" class="game-icon"><div class="game-title">Riddle School 4</div></div></a>
+
+<a href="flash/riddleschool5/riddleschool5.html" class="game-link"><div class="game-tile"><img src="flash/riddleschool5/riddle-school-5.png" class="game-icon"><div class="game-title">Riddle School 5</div></div></a>
+
+<a href="flash/run2/run2.html" class="game-link"><div class="game-tile"><img src="flash/run2/run2.jpg" class="game-icon"><div class="game-title">Run 2</div></div></a>
+
+<a href="flash/run3flash/run3-f-.html" class="game-link"><div class="game-tile"><img src="flash/run3flash/run3.jpeg" class="game-icon"><div class="game-title">Run 3</div></div></a>
+
+<a href="flash/sas:zombieassault3/sas�zombieassault3.html" class="game-link"><div class="game-tile"><img src="flash/sas:zombieassault3/sas�zombieassault3.png" class="game-icon"><div class="game-title">SAS Zombie Assault 3</div></div></a>
+
+<a href="flash/shoppingcarthero3/shoppingcarthero3.html" class="game-link"><div class="game-tile"><img src="flash/shoppingcarthero3/shoppingcarthero3.jpg" class="game-icon"><div class="game-title">Shopping Cart Hero 3</div></div></a>
+
+<a href="flash/siftheads/siftheads.html" class="game-link"><div class="game-tile"><img src="flash/siftheads/siftheads.png" class="game-icon"><div class="game-title">Sift Heads</div></div></a>
+
+<a href="flash/siftheads2/siftheads2.html" class="game-link"><div class="game-tile"><img src="flash/siftheads2/siftheads2.png" class="game-icon"><div class="game-title">Sift Heads 2</div></div></a>
+
+<a href="flash/siftheads3/siftheads3.html" class="game-link"><div class="game-tile"><img src="flash/siftheads3/siftheads3.png" class="game-icon"><div class="game-title">Sift Heads 3</div></div></a>
+
+<a href="flash/siftheads4/siftheads4.html" class="game-link"><div class="game-tile"><img src="flash/siftheads4/siftheads4.png" class="game-icon"><div class="game-title">Sift Heads 4</div></div></a>
+
+<a href="flash/siftheads5/siftheads5.html" class="game-link"><div class="game-tile"><img src="flash/siftheads5/siftheads5.png" class="game-icon"><div class="game-title">Sift Heads 5</div></div></a>
+
+<a href="flash/sniperassassin4/sniperassassin4.html" class="game-link"><div class="game-tile"><img src="flash/sniperassassin4/sniperassassin4.jpeg" class="game-icon"><div class="game-title">Sniper Assassin 4</div></div></a>
+
+<a href="flash/sportsheadsfootball/sportsheadsfootball.html" class="game-link"><div class="game-tile"><img src="flash/sportsheadsfootball/sportsheadsfootball.jpeg" class="game-icon"><div class="game-title">Sports Heads Football</div></div></a>
+
+<a href="flash/sportsheadsracing/sportsheadsracing.html" class="game-link"><div class="game-tile"><img src="flash/sportsheadsracing/sportsheadsracing.jpeg" class="game-icon"><div class="game-title">Sports Heads Racing</div></div></a>
+
+<a href="Stealth Assasin/StealthAssasin.html" class="game-link"><div class="game-tile"><img src="Stealth Assasin/stealth.png" class="game-icon"><div class="game-title">Stealth Assassin</div></div></a>
+
+<a href="flash/stickRPG/stickRPG.html" class="game-link"><div class="game-tile"><img src="flash/stickRPG/stickRPG.png" class="game-icon"><div class="game-title">Stick RPG</div></div></a>
+
+<a href="flash/stickwar/stickwar.html" class="game-link"><div class="game-tile"><img src="flash/stickwar/stickwar.jpeg" class="game-icon"><div class="game-title">Stick War</div></div></a>
+
+<a href="flash/strikeforceheroes2/strikeforceheroes2.html" class="game-link"><div class="game-tile"><img src="flash/strikeforceheroes2/strikeforceheroes2.jpeg" class="game-icon"><div class="game-title">Strike Force Heroes 2</div></div></a>
+
+<a href="flash/strikeforcekittylaststand/strikeforcekittylaststand.html" class="game-link"><div class="game-tile"><img src="flash/strikeforcekittylaststand/strikeforcekittylaststand.jpeg" class="game-icon"><div class="game-title">Strike Force Kitty Last Stand</div></div></a>
+  
+<a href="flash/xenos/xenos.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/xenos/xenos.png" class="game-icon">
+    <div class="game-title">Xenos</div>
+  </div>
+</a>
+
+<a href="flash/xtremecliffdiving/xtremecliffdiving.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/xtremecliffdiving/xtremecliffdiving.png" class="game-icon">
+    <div class="game-title">Xtreme Cliff Diving</div>
+  </div>
+</a>
+
+<a href="flash/yearofthesnake/yearofthesnake.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/yearofthesnake/yearofthesnake.png" class="game-icon">
+    <div class="game-title">Year of the Snake</div>
+  </div>
+</a>
+
+<a href="flash/yuriusshouseofspooks/yuriusshouseofspooks.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/yuriusshouseofspooks/yuriusshouseofspooks.png" class="game-icon">
+    <div class="game-title">Yurius’s House of Spooks</div>
+  </div>
+</a>
+
+<a href="flash/zombiealienparasites/zombiealienparasites.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/zombiealienparasites/zombiealienparasites.png" class="game-icon">
+    <div class="game-title">Zombie Alien Parasites</div>
+  </div>
+</a>
+
+  <a href="flash/1/8ballpool.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/8ballpool.jpg" class="game-icon">
+    <div class="game-title">8 Ball Pool</div>
+  </div>
+</a>
+
+<a href="flash/1/Bowman.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/bowman.webp" class="game-icon">
+    <div class="game-title">Bowman</div>
+  </div>
+</a>
+
+<a href="flash/1/ageofdefense.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/ageofdefense.webp" class="game-icon">
+    <div class="game-title">Age of Defense</div>
+  </div>
+</a>
+
+<a href="flash/1/ageofdefense3.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/ageofdefense3.png" class="game-icon">
+    <div class="game-title">Age of Defense 3</div>
+  </div>
+</a>
+
+<a href="flash/1/airporttycoon.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/airporttycoon.png" class="game-icon">
+    <div class="game-title">Airport Tycoon</div>
+  </div>
+</a>
+
+<a href="flash/1/alchemy.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/alchemy.png" class="game-icon">
+    <div class="game-title">Alchemy</div>
+  </div>
+</a>
+
+<a href="flash/1/aliceisdeadepisode2.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/aliceisdeadepisode2.jpg" class="game-icon">
+    <div class="game-title">Alice Is Dead Episode 2</div>
+  </div>
+</a>
+
+<a href="flash/1/aliceisdeadepisode3.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/aliceisdeadepisode3.jpeg" class="game-icon">
+    <div class="game-title">Alice Is Dead Episode 3</div>
+  </div>
+</a>
+
+<a href="flash/1/alien-hominid.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/alien-hominid.png" class="game-icon">
+    <div class="game-title">Alien Hominid</div>
+  </div>
+</a>
+
+<a href="flash/1/appleshooter.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/appleshooter.png" class="game-icon">
+    <div class="game-title">Apple Shooter</div>
+  </div>
+</a>
+
+<a href="flash/1/artofwar.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/artofwar.jpg" class="game-icon">
+    <div class="game-title">Art of War</div>
+  </div>
+</a>
+
+<a href="flash/1/artofwar2.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/artofwar2.png" class="game-icon">
+    <div class="game-title">Art of War 2</div>
+  </div>
+</a>
+
+<a href="flash/1/asteroids.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/asteroids.png" class="game-icon">
+    <div class="game-title">Asteroids</div>
+  </div>
+</a>
+
+<a href="flash/1/awesometanks2.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/awesometanks2.png" class="game-icon">
+    <div class="game-title">Awesome Tanks 2</div>
+  </div>
+</a>
+
+<a href="flash/1/battlegear.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/battlegear.webp" class="game-icon">
+    <div class="game-title">Battle Gear</div>
+  </div>
+</a>
+
+<a href="flash/1/battlegear2.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/battlegear2.webp" class="game-icon">
+    <div class="game-title">Battle Gear 2</div>
+  </div>
+</a>
+
+<a href="flash/1/battlegear3.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/battlegear3.png" class="game-icon">
+    <div class="game-title">Battle Gear 3</div>
+  </div>
+</a>
+
+<a href="flash/1/battlemechs.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/battlemechs.png" class="game-icon">
+    <div class="game-title">Battle Mechs</div>
+  </div>
+</a>
+
+<a href="flash/1/battleshipsGeneralQuarters.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/battleshipsgeneralquarters.png" class="game-icon">
+    <div class="game-title">Battleships: General Quarters</div>
+  </div>
+</a>
+
+<a href="flash/1/bigtruckadventures2.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/bigtruckadventures2.png" class="game-icon">
+    <div class="game-title">Big Truck Adventures 2</div>
+  </div>
+</a>
+
+<a href="flash/1/bigtruckadventures3.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/bigtruckadventures3.png" class="game-icon">
+    <div class="game-title">Big Truck Adventures 3</div>
+  </div>
+</a>
+
+<a href="flash/1/bloonstd2.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/bloonstd2.svg" class="game-icon">
+    <div class="game-title">Bloons TD 2</div>
+  </div>
+</a>
+
+<a href="flash/1/bmx-park.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/bmx-park.png" class="game-icon">
+    <div class="game-title">BMX Park</div>
+  </div>
+</a>
+
+<a href="flash/1/bmxextreme.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/bmxextreme.webp" class="game-icon">
+    <div class="game-title">BMX Extreme</div>
+  </div>
+</a>
+
+<a href="flash/1/bmxmaster.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/bmxmaster.jpeg" class="game-icon">
+    <div class="game-title">BMX Master</div>
+  </div>
+</a>
+
+<a href="flash/1/bowMaster.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/bowman.webp" class="game-icon">
+    <div class="game-title">Bow Master</div>
+  </div>
+</a>
+
+<a href="flash/1/bowman2.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/bowman2.jpeg" class="game-icon">
+    <div class="game-title">Bowman 2</div>
+  </div>
+</a>
+
+<a href="flash/1/bowmaster-prelude.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/bowmaster.jpeg" class="game-icon">
+    <div class="game-title">Bowmaster Prelude</div>
+  </div>
+</a>
+
+<a href="flash/1/bubbels.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/bubbels.png" class="game-icon">
+    <div class="game-title">Bubbels</div>
+  </div>
+</a>
+
+<a href="flash/1/bubble-shooter-4.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/bubbleshooter4.png" class="game-icon">
+    <div class="game-title">Bubble Shooter 4</div>
+  </div>
+</a>
+
+<a href="flash/1/bubbleblaster.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/bubbleblaster.png" class="game-icon">
+    <div class="game-title">Bubble Blaster</div>
+  </div>
+</a>
+
+<a href="flash/1/bubblebobble.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/bubblebobble.png" class="game-icon">
+    <div class="game-title">Bubble Bobble</div>
+  </div>
+</a>
+
+<a href="flash/1/bubblebreaker.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/bubblebreaker.png" class="game-icon">
+    <div class="game-title">Bubble Breaker</div>
+  </div>
+</a>
+
+<a href="flash/1/bubblebuster.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/bubblebuster.png" class="game-icon">
+    <div class="game-title">Bubble Buster</div>
+  </div>
+</a>
+
+<a href="flash/1/bubblepop.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/bubblepop.png" class="game-icon">
+    <div class="game-title">Bubble Pop</div>
+  </div>
+</a>
+
+<a href="flash/1/bubbleshooter.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/bubbleshooter.png" class="game-icon">
+    <div class="game-title">Bubble Shooter</div>
+  </div>
+</a>
+
+<a href="flash/1/bubbleshooter2.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/bubbleshooter2.png" class="game-icon">
+    <div class="game-title">Bubble Shooter 2</div>
+  </div>
+</a>
+
+<a href="flash/1/bubbleshooter3.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/bubbleshooter3.png" class="game-icon">
+    <div class="game-title">Bubble Shooter 3</div>
+  </div>
+</a>
+
+<a href="flash/1/bubblespinner.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/bubblespinner.png" class="game-icon">
+    <div class="game-title">Bubble Spinner</div>
+  </div>
+</a>
+
+<a href="flash/1/bubbletanks.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/bubbletanks.png" class="game-icon">
+    <div class="game-title">Bubble Tanks</div>
+  </div>
+</a>
+
+<a href="flash/1/bubbletanks2.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/bubbletanks2.png" class="game-icon">
+    <div class="game-title">Bubble Tanks 2</div>
+  </div>
+</a>
+
+<a href="flash/1/canyondefense.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/canyondefense.webp" class="game-icon">
+    <div class="game-title">Canyon Defense</div>
+  </div>
+</a>
+
+<a href="flash/1/causality3.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/causality3.png" class="game-icon">
+    <div class="game-title">Causality 3</div>
+  </div>
+</a>
+
+<a href="flash/1/chaosfaction.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/chaosfaction.png" class="game-icon">
+    <div class="game-title">Chaos Faction</div>
+  </div>
+</a>
+
+<a href="flash/1/chaosfaction2.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/chaosfaction2.png" class="game-icon">
+    <div class="game-title">Chaos Faction 2</div>
+  </div>
+</a>
+
+<a href="flash/1/checkersfun.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/checkersfun.png" class="game-icon">
+    <div class="game-title">Checkers Fun</div>
+  </div>
+</a>
+
+<a href="flash/1/chooseyourweapon.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/chooseyerweapon.jpeg" class="game-icon">
+    <div class="game-title">Choose Your Weapon</div>
+  </div>
+</a>
+
+<a href="flash/1/chooseyourweapon2.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/chooseyourweapon2.jpg" class="game-icon">
+    <div class="game-title">Choose Your Weapon 2</div>
+  </div>
+</a>
+
+<a href="flash/1/chooseyourweapon3.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/chooseyourweapon3.png" class="game-icon">
+    <div class="game-title">Choose Your Weapon 3</div>
+  </div>
+</a>
+
+<a href="flash/1/clearvision.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/clearvision.jpeg" class="game-icon">
+    <div class="game-title">Clear Vision</div>
+  </div>
+</a>
+
+<a href="flash/1/clearvision2.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/clearvision2.png" class="game-icon">
+    <div class="game-title">Clear Vision 2</div>
+  </div>
+</a>
+
+<a href="flash/1/clearvision3.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/clearvision3.jpeg" class="game-icon">
+    <div class="game-title">Clear Vision 3</div>
+  </div>
+</a>
+
+<a href="flash/1/clearvision4.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/clearvision4.png" class="game-icon">
+    <div class="game-title">Clear Vision 4</div>
+  </div>
+</a>
+
+<a href="flash/1/colorcombat.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/colorcombat.png" class="game-icon">
+    <div class="game-title">Color Combat</div>
+  </div>
+</a>
+
+<a href="flash/1/commandobattleofbritain.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/commando2.jpeg" class="game-icon">
+    <div class="game-title">Commando: Battle of Britain</div>
+  </div>
+</a>
+
+<a href="flash/1/crossword.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/crossword.png" class="game-icon">
+    <div class="game-title">Crossword</div>
+  </div>
+</a>
+
+<a href="flash/1/crosswordpuzzle.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/crosswordpuzzle.png" class="game-icon">
+    <div class="game-title">Crossword Puzzle</div>
+  </div>
+</a>
+
+<a href="flash/1/darkcut.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/darkcut.png" class="game-icon">
+    <div class="game-title">Dark Cut</div>
+  </div>
+</a>
+
+<a href="flash/1/darkcut2.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/darkcut2.png" class="game-icon">
+    <div class="game-title">Dark Cut 2</div>
+  </div>
+</a>
+
+<a href="flash/1/darkcut3.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/darkcut3.png" class="game-icon">
+    <div class="game-title">Dark Cut 3</div>
+  </div>
+</a>
+
+<a href="flash/1/defendyourcastle.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/defendyourcastle.jpeg" class="game-icon">
+    <div class="game-title">Defend Your Castle</div>
+  </div>
+</a>
+
+<a href="flash/1/desktoptowerdefense.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/desktoptowerdefense.jpeg" class="game-icon">
+    <div class="game-title">Desktop Tower Defense</div>
+  </div>
+</a>
+
+<a href="flash/1/digtochina.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/digtochina.jpeg" class="game-icon">
+    <div class="game-title">Dig to China</div>
+  </div>
+</a>
+
+<a href="flash/1/dontwhackyourteacher.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/dontwhackyourteacher.png" class="game-icon">
+    <div class="game-title">Don't Whack Your Teacher</div>
+  </div>
+</a>
+
+<a href="flash/1/douchebag'schick.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/douchebagschick.png" class="game-icon">
+    <div class="game-title">Douchebag's Chick</div>
+  </div>
+</a>
+
+<a href="flash/1/douchebaglife.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/douchebaglife.png" class="game-icon">
+    <div class="game-title">Douchebag Life</div>
+  </div>
+</a>
+
+<a href="flash/1/douchebagworkout2.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/douchebagworkout2.jpg" class="game-icon">
+    <div class="game-title">Douchebag Workout 2</div>
+  </div>
+</a>
+
+<a href="flash/1/dragracerv2.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/dragracerv2.png" class="game-icon">
+    <div class="game-title">Drag Racer V2</div>
+  </div>
+</a>
+
+<a href="flash/1/dragracerv3.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/dragracerv3.png" class="game-icon">
+    <div class="game-title">Drag Racer V3</div>
+  </div>
+</a>
+
+<a href="flash/1/droidassault.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/droidassault.png" class="game-icon">
+    <div class="game-title">Droid Assault</div>
+  </div>
+</a>
+
+<a href="flash/1/duckhunt.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/duckhunt.png" class="game-icon">
+    <div class="game-title">Duck Hunt</div>
+  </div>
+</a>
+
+<a href="flash/1/earthtaken.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/earthtaken.png" class="game-icon">
+    <div class="game-title">Earth Taken</div>
+  </div>
+</a>
+
+<a href="flash/1/earthtaken2.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/earthtaken2.webp" class="game-icon">
+    <div class="game-title">Earth Taken 2</div>
+  </div>
+</a>
+
+<a href="flash/1/earthtaken3.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/earthtaken3.jpeg" class="game-icon">
+    <div class="game-title">Earth Taken 3</div>
+  </div>
+</a>
+
+<a href="flash/1/endless-war.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/endlesswar.webp" class="game-icon">
+    <div class="game-title">Endless War</div>
+  </div>
+</a>
+
+<a href="flash/1/endlesswar2.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/endlesswar2.jpg" class="game-icon">
+    <div class="game-title">Endless War 2</div>
+  </div>
+</a>
+
+<a href="flash/1/endlesswar3.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/endlesswar3.jpeg" class="game-icon">
+    <div class="game-title">Endless War 3</div>
+  </div>
+</a>
+
+<a href="flash/1/endlesswar4.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/endlesswar4.jpeg" class="game-icon">
+    <div class="game-title">Endless War 4</div>
+  </div>
+</a>
+
+<a href="flash/1/escapefromtheladiesroom.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/escapetheladiesroom.png" class="game-icon">
+    <div class="game-title">Escape From the Ladies Room</div>
+  </div>
+</a>
+
+<a href="flash/1/escapeseries2�thecloset.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/escapethecloset.jpeg" class="game-icon">
+    <div class="game-title">Escape Series 2: The Closet</div>
+  </div>
+</a>
+
+<a href="flash/1/escapeseries4�thebathroom.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/escapeseries4thebathroom.png" class="game-icon">
+    <div class="game-title">Escape Series 4: The Bathroom</div>
+  </div>
+</a>
+
+<a href="flash/1/escapetheclassroom.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/escapetheclassrooms.jpg" class="game-icon">
+    <div class="game-title">Escape the Classroom</div>
+  </div>
+</a>
+
+<a href="flash/1/escapetheroom.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/escapetheroom.png" class="game-icon">
+    <div class="game-title">Escape the Room</div>
+  </div>
+</a>
+
+<a href="flash/1/factoryballsthechristmasedition.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/factoryballsthechristmasedition.png" class="game-icon">
+    <div class="game-title">Factory Balls: The Christmas Edition</div>
+  </div>
+</a>
+
+<a href="flash/1/fireboyandwatergirlinthecrystaltemple.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/fireboyandwatergirlinthecrystaltemple.png" class="game-icon">
+    <div class="game-title">Fireboy and Watergirl in the Crystal Temple</div>
+  </div>
+</a>
+
+<a href="flash/1/fireboyandwatergirlinthelighttemple.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/fireboyandwatergirlinthelighttemple.jpeg" class="game-icon">
+    <div class="game-title">Fireboy and Watergirl in the Light Temple</div>
+  </div>
+</a>
+
+<a href="flash/1/fltron2.0.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/fltron.png" class="game-icon">
+    <div class="game-title">FL Tron 2.0</div>
+  </div>
+</a>
+
+<a href="flash/1/freerider.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/freerider.png" class="game-icon">
+    <div class="game-title">Free Rider</div>
+  </div>
+</a>
+
+<a href="flash/1/freerun.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/freerun.png" class="game-icon">
+    <div class="game-title">Free Run</div>
+  </div>
+</a>
+
+<a href="flash/1/gogoplant.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/gogoplant.jpg" class="game-icon">
+    <div class="game-title">Go Go Plant</div>
+  </div>
+</a>
+
+<a href="flash/1/gogoplant2.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/gogoplant2.png" class="game-icon">
+    <div class="game-title">Go Go Plant 2</div>
+  </div>
+</a>
+
+<a href="flash/1/grandtheftautoaflashstory.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/grandtheftautoaflashstory.png" class="game-icon">
+    <div class="game-title">Grand Theft Auto: A Flash Story</div>
+  </div>
+</a>
+
+<a href="flash/1/graviteewars.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/graviteewars.jpeg" class="game-icon">
+    <div class="game-title">Gravitee Wars</div>
+  </div>
+</a>
+
+<a href="flash/1/greyhoundracingtycoon.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/greyhoundracingtycoon.jpg" class="game-icon">
+    <div class="game-title">Greyhound Racing Tycoon</div>
+  </div>
+</a>
+
+<a href="flash/1/growcube.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/growcube.png" class="game-icon">
+    <div class="game-title">Grow Cube</div>
+  </div>
+</a>
+
+<a href="flash/1/growisland.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/growisland.png" class="game-icon">
+    <div class="game-title">Grow Island</div>
+  </div>
+</a>
+
+<a href="flash/1/growvalley.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/growvalley.jpeg" class="game-icon">
+    <div class="game-title">Grow Valley</div>
+  </div>
+</a>
+
+<a href="flash/1/gumdrophop.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/gumdrophop.jpg" class="game-icon">
+    <div class="game-title">Gum Drop Hop</div>
+  </div>
+</a>
+
+<a href="flash/1/gumdrophop2.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/gumdrophop2.png" class="game-icon">
+    <div class="game-title">Gum Drop Hop 2</div>
+  </div>
+</a>
+
+<a href="flash/1/gumdrophop3.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/gumdrophop3.png" class="game-icon">
+    <div class="game-title">Gum Drop Hop 3</div>
+  </div>
+</a>
+
+<a href="flash/1/gumdrophop4.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/gumdrophop4.png" class="game-icon">
+    <div class="game-title">Gum Drop Hop 4</div>
+  </div>
+</a>
+
+<a href="flash/1/hapland.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/hapland.jpg" class="game-icon">
+    <div class="game-title">Hapland</div>
+  </div>
+</a>
+
+<a href="flash/1/hapland2.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/hapland2.png" class="game-icon">
+    <div class="game-title">Hapland 2</div>
+  </div>
+</a>
+
+<a href="flash/1/hapland3.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/hapland3.jpeg" class="game-icon">
+    <div class="game-title">Hapland 3</div>
+  </div>
+</a>
+
+<a href="flash/1/kamikazepigs.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/kamikazepigs.webp" class="game-icon">
+    <div class="game-title">Kamikaze Pigs</div>
+  </div>
+</a>
+
+<a href="flash/1/linerider.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/linerider.webp" class="game-icon">
+    <div class="game-title">Line Rider</div>
+  </div>
+</a>
+
+<a href="flash/1/linerider2.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/linerider2.jpeg" class="game-icon">
+    <div class="game-title">Line Rider 2</div>
+  </div>
+</a>
+
+<a href="flash/1/linerider3.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/linerider3.png" class="game-icon">
+    <div class="game-title">Line Rider 3</div>
+  </div>
+</a>
+
+<a href="flash/1/lineriderundoedition.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/lineriderundoedition.png" class="game-icon">
+    <div class="game-title">Line Rider: Undo Edition</div>
+  </div>
+</a>
+
+<a href="flash/1/mariocart.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/mariocart2.jpg" class="game-icon">
+    <div class="game-title">Mario Cart</div>
+  </div>
+</a>
+
+<a href="flash/1/mariokartflashgame.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/mariokartflashgame.png" class="game-icon">
+    <div class="game-title">Mario Kart Flash Game</div>
+  </div>
+</a>
+
+<a href="flash/1/martixbullettimefighting.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/martixbullettimefighting.webp" class="game-icon">
+    <div class="game-title">Matrix: Bullet Time Fighting</div>
+  </div>
+</a>
+
+<a href="flash/1/massmayhem.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/massmayhem.webp" class="game-icon">
+    <div class="game-title">Mass Mayhem</div>
+  </div>
+</a>
+
+<a href="flash/1/massmayhem2.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/massmayhem2.png" class="game-icon">
+    <div class="game-title">Mass Mayhem 2</div>
+  </div>
+</a>
+
+<a href="flash/1/massmayhem3.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/massmayhem3.png" class="game-icon">
+    <div class="game-title">Mass Mayhem 3</div>
+  </div>
+</a>
+
+<a href="flash/1/massmayhem4.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/massmayhem4.png" class="game-icon">
+    <div class="game-title">Mass Mayhem 4</div>
+  </div>
+</a>
+
+<a href="flash/1/massmayhemzombieapocalypse.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/massmayhemzombieapocalypse.png" class="game-icon">
+    <div class="game-title">Mass Mayhem: Zombie Apocalypse</div>
+  </div>
+</a>
+
+<a href="flash/1/massmayhemzombieapocalypse-expansion.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/massmayhemzombieapocalypse.png" class="game-icon">
+    <div class="game-title">Mass Mayhem: Zombie Apocalypse Expansion</div>
+  </div>
+</a>
+
+<a href="flash/1/minecrafttowerdefense.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/minecrafttowerdefense.png" class="game-icon">
+    <div class="game-title">Minecraft Tower Defense</div>
+  </div>
+</a>
+
+<a href="flash/1/miniputt.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/miniputt.jpeg" class="game-icon">
+    <div class="game-title">Mini Putt</div>
+  </div>
+</a>
+
+<a href="flash/1/miniputt2.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/miniputt2.png" class="game-icon">
+    <div class="game-title">Mini Putt 2</div>
+  </div>
+</a>
+
+<a href="flash/1/miniputt3.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/miniputt3.webp" class="game-icon">
+    <div class="game-title">Mini Putt 3</div>
+  </div>
+</a>
+
+<a href="flash/1/myfriendpedro.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/myfriendpedro.jpeg" class="game-icon">
+    <div class="game-title">My Friend Pedro</div>
+  </div>
+</a>
+
+<a href="flash/1/newyorkshark.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/newyorkshark.jpeg" class="game-icon">
+    <div class="game-title">New York Shark</div>
+  </div>
+</a>
+
+<a href="flash/1/pandemicextinctionofman.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/pandemicextinctionofman.png" class="game-icon">
+    <div class="game-title">Pandemic: Extinction of Man</div>
+  </div>
+</a>
+
+<a href="flash/1/papas-taco-mia.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/papastacomia.avif" class="game-icon">
+    <div class="game-title">Papa's Taco Mia!</div>
+  </div>
+</a>
+
+<a href="flash/1/papasbakeria.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/papasbakeria.png" class="game-icon">
+    <div class="game-title">Papa's Bakeria</div>
+  </div>
+</a>
+
+<a href="flash/1/papasburgeria.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/papasburgeria.jfif" class="game-icon">
+    <div class="game-title">Papa's Burgeria</div>
+  </div>
+</a>
+
+<a href="flash/1/papascheeseria.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/papascheeseria.jpg" class="game-icon">
+    <div class="game-title">Papa's Cheeseria</div>
+  </div>
+</a>
+
+<a href="flash/1/papascupcakeria.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/papascupcakeria.jpeg" class="game-icon">
+    <div class="game-title">Papa's Cupcakeria</div>
+  </div>
+</a>
+
+<a href="flash/1/papasdonuteria.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/papasdonuteria.jpeg" class="game-icon">
+    <div class="game-title">Papa's Donuteria</div>
+  </div>
+</a>
+
+<a href="flash/1/papasfreezeria.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/papasfreezeria.jpeg" class="game-icon">
+    <div class="game-title">Papa's Freezeria</div>
+  </div>
+</a>
+
+<a href="flash/1/papashotdoggeria.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/papashotdoggeria.jpeg" class="game-icon">
+    <div class="game-title">Papa's Hot Doggeria</div>
+  </div>
+</a>
+
+<a href="flash/1/papaspancakeria.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/papaspancakeria.jpeg" class="game-icon">
+    <div class="game-title">Papa's Pancakeria</div>
+  </div>
+</a>
+
+<a href="flash/1/papaspastaria.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/papaspastaria.avif" class="game-icon">
+    <div class="game-title">Papa's Pastaria</div>
+  </div>
+</a>
+
+<a href="flash/1/papaspizzeria.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/papaspizzeria.png" class="game-icon">
+    <div class="game-title">Papa's Pizzeria</div>
+  </div>
+</a>
+
+<a href="flash/1/papasscooperia.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/papasscooperia.avif" class="game-icon">
+    <div class="game-title">Papa's Scooperia</div>
+  </div>
+</a>
+
+<a href="flash/1/papassushiria.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/papassushiria.jpeg" class="game-icon">
+    <div class="game-title">Papa's Sushiria</div>
+  </div>
+</a>
+
+<a href="flash/1/papaswingeria.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/papaswingeria.jpeg" class="game-icon">
+    <div class="game-title">Papa's Wingeria</div>
+  </div>
+</a>
+
+<a href="flash/1/plantsvszombies2.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/plantsvszombies2.webp" class="game-icon">
+    <div class="game-title">Plants vs. Zombies 2</div>
+  </div>
+</a>
+
+<a href="flash/1/portaltheenergeticchain.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/portaltheenergeticchain.png" class="game-icon">
+    <div class="game-title">Portal: The Energetic Chain</div>
+  </div>
+</a>
+
+<a href="flash/1/pottyracers.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/pottyracers.png" class="game-icon">
+    <div class="game-title">Potty Racers</div>
+  </div>
+</a>
+
+<a href="flash/1/pottyracers2.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/pottyracers2.jpeg" class="game-icon">
+    <div class="game-title">Potty Racers 2</div>
+  </div>
+</a>
+
+<a href="flash/1/ray.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/ray.jpg" class="game-icon">
+    <div class="game-title">Ray</div>
+  </div>
+</a>
+
+<a href="flash/1/raypart2.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/raypart2.png" class="game-icon">
+    <div class="game-title">Ray Part 2</div>
+  </div>
+</a>
+
+<a href="flash/1/raypart3.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/raypart3.png" class="game-icon">
+    <div class="game-title">Ray Part 3</div>
+  </div>
+</a>
+
+<a href="flash/1/redcar.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/redcar.png" class="game-icon">
+    <div class="game-title">Red Car</div>
+  </div>
+</a>
+
+<a href="flash/1/redcar2.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/redcar2.png" class="game-icon">
+    <div class="game-title">Red Car 2</div>
+  </div>
+</a>
+
+<a href="flash/1/returnman2.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/returnman2.png" class="game-icon">
+    <div class="game-title">Return Man 2</div>
+  </div>
+</a>
+
+<a href="flash/1/returnman2mudbowl.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/returnman2mudbowl.jpg" class="game-icon">
+    <div class="game-title">Return Man 2: Mud Bowl</div>
+  </div>
+</a>
+
+<a href="flash/1/returnman2zombies.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/return-man-2-zombies.webp" class="game-icon">
+    <div class="game-title">Return Man 2: Zombies</div>
+  </div>
+</a>
+
+<a href="flash/1/riddletransfer.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/riddletransfer.webp" class="game-icon">
+    <div class="game-title">Riddle Transfer</div>
+  </div>
+</a>
+
+<a href="flash/1/riddleschooltransfer2.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/riddletransfer2.png" class="game-icon">
+    <div class="game-title">Riddle School Transfer 2</div>
+  </div>
+</a>
+
+<a href="flash/1/rubikscube.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/rubikscube.png" class="game-icon">
+    <div class="game-title">Rubik's Cube</div>
+  </div>
+</a>
+
+<a href="flash/1/run.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/run.png" class="game-icon">
+    <div class="game-title">Run</div>
+  </div>
+</a>
+
+<a href="flash/1/sketch.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/sketch.png" class="game-icon">
+    <div class="game-title">Sketch</div>
+  </div>
+</a>
+
+<a href="flash/1/spiderman.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/spiderman.png" class="game-icon">
+    <div class="game-title">Spider-Man</div>
+  </div>
+</a>
+
+<a href="flash/1/stickbrawl.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/stickbrawl.jpeg" class="game-icon">
+    <div class="game-title">Stick Brawl</div>
+  </div>
+</a>
+
+<a href="flash/1/stop-gmo.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/stopgmo.png" class="game-icon">
+    <div class="game-title">Stop GMO</div>
+  </div>
+</a>
+
+<a href="flash/1/strikeforceheroes.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/strikeforceheroes.png" class="game-icon">
+    <div class="game-title">Strike Force Heroes</div>
+  </div>
+</a>
+
+<a href="flash/1/strikeforceheroes3.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/strikeforceheroes3.png" class="game-icon">
+    <div class="game-title">Strike Force Heroes 3</div>
+  </div>
+</a>
+
+<a href="flash/1/supersmashflash2.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/supersmashflash2.png" class="game-icon">
+    <div class="game-title">Super Smash Flash 2</div>
+  </div>
+</a>
+
+<a href="flash/1/swordsandsandals.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/swordsandsandals.webp" class="game-icon">
+    <div class="game-title">Swords and Sandals</div>
+  </div>
+</a>
+
+<a href="flash/1/swordsandsandals2.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/swordsandsandals2.jpeg" class="game-icon">
+    <div class="game-title">Swords and Sandals 2</div>
+  </div>
+</a>
+
+<a href="flash/1/territorywar.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/territorywar.png" class="game-icon">
+    <div class="game-title">Territory War</div>
+  </div>
+</a>
+
+<a href="flash/1/thewaitress.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/thewaitress.jpeg" class="game-icon">
+    <div class="game-title">The Waitress</div>
+  </div>
+</a>
+
+<a href="flash/1/ultimatedouchebagworkout.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/ultimatedouchebagworkout.png" class="game-icon">
+    <div class="game-title">Ultimate Douchebag Workout</div>
+  </div>
+</a>
+
+<a href="flash/1/unfairmario.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/unfairmario.png" class="game-icon">
+    <div class="game-title">Unfair Mario</div>
+  </div>
+</a>
+
+<a href="flash/1/whackyourboss.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/whackyourboss.png" class="game-icon">
+    <div class="game-title">Whack Your Boss</div>
+  </div>
+</a>
+
+<a href="flash/1/whackyourboss17ways.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/whackyourboss17ways.png" class="game-icon">
+    <div class="game-title">Whack Your Boss 17 Ways</div>
+  </div>
+</a>
+
+<a href="flash/1/whackyourboss20ways.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/whackyourboss20ways.png" class="game-icon">
+    <div class="game-title">Whack Your Boss 20 Ways</div>
+  </div>
+</a>
+
+<a href="flash/1/whackyourboss24ways.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/whackyourboss24ways.png" class="game-icon">
+    <div class="game-title">Whack Your Boss 24 Ways</div>
+  </div>
+</a>
+
+<a href="flash/1/wheely.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/wheely.webp" class="game-icon">
+    <div class="game-title">Wheely</div>
+  </div>
+</a>
+
+<a href="flash/1/wheely2.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/wheely2.png" class="game-icon">
+    <div class="game-title">Wheely 2</div>
+  </div>
+</a>
+
+<a href="flash/1/wheely3.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/wheely3.jpeg" class="game-icon">
+    <div class="game-title">Wheely 3</div>
+  </div>
+</a>
+
+<a href="flash/1/wheely4.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/wheely4.jpeg" class="game-icon">
+    <div class="game-title">Wheely 4</div>
+  </div>
+</a>
+
+<a href="flash/1/wheely5.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/wheely5.jpeg" class="game-icon">
+    <div class="game-title">Wheely 5</div>
+  </div>
+</a>
+
+<a href="flash/1/wheely6.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/wheely6.jpeg" class="game-icon">
+    <div class="game-title">Wheely 6</div>
+  </div>
+</a>
+
+<a href="flash/1/wheely7.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/wheely7.jpeg" class="game-icon">
+    <div class="game-title">Wheely 7</div>
+  </div>
+</a>
+
+<a href="flash/1/wheely8.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/wheely7.jpeg" class="game-icon">
+    <div class="game-title">Wheely 8</div>
+  </div>
+</a>
+
+<a href="flash/1/zombiehorde.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/zombiehorde.png" class="game-icon">
+    <div class="game-title">Zombie Horde</div>
+  </div>
+</a>
+
+<a href="flash/1/zombiehorde2.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/zombiehorde2.png" class="game-icon">
+    <div class="game-title">Zombie Horde 2</div>
+  </div>
+</a>
+
+<a href="flash/1/zomebiehorde3.html" class="game-link">
+  <div class="game-tile">
+    <img src="flash/1/zombiehorde3.png" class="game-icon">
+    <div class="game-title">Zombie Horde 3</div>
+  </div>
+</a>
+
+  <a href="flash/1hsr/handheld-games-menu/HairstyleRunner.html" class="game-link">
+<div class="game-tile">
+<img src="flash/1hsr/handheld-games-menu/HairstyleRunner.png" class="game-icon">
+<div class="game-title">Hairstyle Runner</div>
+</div></a>
+
+<a href="flash/1hsr/handheld-games-menu/OldAstroLite.html" class="game-link">
+<div class="game-tile">
+<img src="flash/1hsr/handheld-games-menu/OldAstroLite.png" class="game-icon">
+<div class="game-title">Old Astro Lite </div>
+</div></a>
+
+<a href="flash/1hsr/handheld-games-menu/auditionWithMarzipan.html" class="game-link">
+<div class="game-tile">
+<img src="flash/1hsr/handheld-games-menu/auditionWithMarzipan.png" class="game-icon">
+<div class="game-title">Audition With Marzipan</div>
+</div></a>
+
+<a href="flash/1hsr/handheld-games-menu/broncoTrolley.html" class="game-link">
+<div class="game-tile">
+<img src="flash/1hsr/handheld-games-menu/broncoTrolley.png" class="game-icon">
+<div class="game-title">Bronco Trolley</div>
+</div></a>
+
+<a href="flash/1hsr/handheld-games-menu/homestarRunnerPopQuiz.html" class="game-link">
+<div class="game-tile">
+<img src="flash/1hsr/handheld-games-menu/homestarRunnerPopQuiz.png" class="game-icon">
+<div class="game-title">Homestar Runner Pop Quiz</div>
+</div></a>
+
+<a href="flash/1hsr/handheld-games-menu/homestarTalker.html" class="game-link">
+<div class="game-tile">
+<img src="flash/1hsr/handheld-games-menu/homestarTalker.png" class="game-icon">
+<div class="game-title">Homestar Talker</div>
+</div></a>
+
+<a href="flash/1hsr/handheld-games-menu/homestarrunnerfortunecookies.html" class="game-link">
+<div class="game-tile">
+<img src="flash/1hsr/handheld-games-menu/homestarrunnerfortunecookies.png" class="game-icon">
+<div class="game-title">Homestar Runner Fortune Cookies</div>
+</div></a>
+
+<a href="flash/1hsr/handheld-games-menu/strongLibs.html" class="game-link">
+<div class="game-tile">
+<img src="flash/1hsr/handheld-games-menu/strongLibs.png" class="game-icon">
+<div class="game-title">Strong Libs</div>
+</div></a>
+
+<a href="flash/1hsr/handheld-games-menu/whosaidwhatnow.html" class="game-link">
+<div class="game-tile">
+<img src="flash/1hsr/handheld-games-menu/whosaidwhatnow.png" class="game-icon">
+<div class="game-title">Who Said What Now</div>
+</div></a>
+
+
+<a href="flash/1hsr/scrolling-shooter-games/50kracewalker.html" class="game-link">
+<div class="game-tile">
+<img src="flash/1hsr/scrolling-shooter-games/50kracewalker.png" class="game-icon">
+<div class="game-title">50k Race Wvalker</div>
+</div></a>
+
+<a href="flash/1hsr/scrolling-shooter-games/awexomecross98.html" class="game-link">
+<div class="game-tile">
+<img src="flash/1hsr/scrolling-shooter-games/awexomecross98.png" class="game-icon">
+<div class="game-title">Awexome Cross '98</div>
+</div></a>
+
+<a href="flash/1hsr/scrolling-shooter-games/dangeresqueRoomisode1�BehindtheDangerdesque.html" class="game-link">
+<div class="game-tile">
+<img src="flash/1hsr/scrolling-shooter-games/dangeresqueRoomisode1�BehindtheDangerdesque.png" class="game-icon">
+<div class="game-title">Dangeresque Roomisode 1: Behind the Dangerdesque</div>
+</div></a>
+
+<a href="flash/1hsr/scrolling-shooter-games/duckGuardian.html" class="game-link">
+<div class="game-tile">
+<img src="flash/1hsr/scrolling-shooter-games/duckGuardian.png" class="game-icon">
+<div class="game-title">Duck Guardian</div>
+</div></a>
+
+<a href="flash/1hsr/scrolling-shooter-games/kidspeedy.html" class="game-link">
+<div class="game-tile">
+<img src="flash/1hsr/scrolling-shooter-games/kidspeedy.png" class="game-icon">
+<div class="game-title">Kid Speedy</div>
+</div></a>
+
+<a href="flash/1hsr/scrolling-shooter-games/makeyourownstinko(man).html" class="game-link">
+<div class="game-tile">
+<img src="flash/1hsr/scrolling-shooter-games/makeyourownstinko(man).png" class="game-icon">
+<div class="game-title">Make Your Own Stinko (man)</div>
+</div></a>
+
+<a href="flash/1hsr/scrolling-shooter-games/marshie'shalloweenmix-up.html" class="game-link">
+<div class="game-tile">
+<img src="flash/1hsr/scrolling-shooter-games/marshie'shalloweenmix-up.png" class="game-icon">
+<div class="game-title">Marshie's Halloween Mix-up</div>
+</div></a>
+
+<a href="flash/1hsr/scrolling-shooter-games/peasent'squest.html" class="game-link">
+<div class="game-tile">
+<img src="flash/1hsr/scrolling-shooter-games/peasent'squest.png" class="game-icon">
+<div class="game-title">Peasant's Quest</div>
+</div></a>
+
+<a href="flash/1hsr/scrolling-shooter-games/pigsonhead.html" class="game-link">
+<div class="game-tile">
+<img src="flash/1hsr/scrolling-shooter-games/pigsonhead.png" class="game-icon">
+<div class="game-title">Pigs On Head</div>
+</div></a>
+
+<a href="flash/1hsr/scrolling-shooter-games/populationtire.html" class="game-link">
+<div class="game-tile">
+<img src="flash/1hsr/scrolling-shooter-games/populationtire.png" class="game-icon">
+<div class="game-title">Population Tire</div>
+</div></a>
+
+<a href="flash/1hsr/scrolling-shooter-games/rhinofeeder.html" class="game-link">
+<div class="game-tile">
+<img src="flash/1hsr/scrolling-shooter-games/rhinofeeder.png" class="game-icon">
+<div class="game-title">Rhino Feeder</div>
+</div></a>
+
+<a href="flash/1hsr/scrolling-shooter-games/secretcollect.html" class="game-link">
+<div class="game-tile">
+<img src="flash/1hsr/scrolling-shooter-games/secretcollect.png" class="game-icon">
+<div class="game-title">Secret Collect</div>
+</div></a>
+
+<a href="flash/1hsr/scrolling-shooter-games/stinkoman20X6.html" class="game-link">
+<div class="game-tile">
+<img src="flash/1hsr/scrolling-shooter-games/stinkoman20X6.webp" class="game-icon">
+<div class="game-title">Stinkoman 20X6</div>
+</div></a>
+
+<a href="flash/1hsr/scrolling-shooter-games/strongbadzone.html" class="game-link">
+<div class="game-tile">
+<img src="flash/1hsr/scrolling-shooter-games/strongbadzone.png" class="game-icon">
+<div class="game-title">strong Bad Zone</div>
+</div></a>
+
+<a href="flash/1hsr/scrolling-shooter-games/thyDungeonMan2.html" class="game-link">
+<div class="game-tile">
+<img src="flash/1hsr/scrolling-shooter-games/thyDungeonMan2.png" class="game-icon">
+<div class="game-title">Thy Dungeonman 2 </div>
+</div></a>
+
+<a href="flash/1hsr/scrolling-shooter-games/thyDungeonMan3.html" class="game-link">
+<div class="game-tile">
+<img src="flash/1hsr/scrolling-shooter-games/thyDungeonMan3.png" class="game-icon">
+<div class="game-title">Thy Dungeonman 3</div>
+</div></a>
+
+<a href="flash/1hsr/scrolling-shooter-games/thydungeonman.html" class="game-link">
+<div class="game-tile">
+<img src="flash/1hsr/scrolling-shooter-games/thydungeonman.png" class="game-icon">
+<div class="game-title">Thy Dungeonman</div>
+</div></a>
+
+<a href="flash/1hsr/scrolling-shooter-games/trogdor.html" class="game-link">
+<div class="game-tile">
+<img src="flash/1hsr/scrolling-shooter-games/trogdor.webp" class="game-icon">
+<div class="game-title">Trogdor</div>
+</div></a>
+
+<a href="flash/1hsr/scrolling-shooter-games/wheresAnEgg-non-english.html" class="game-link">
+<div class="game-tile">
+<img src="flash/1hsr/scrolling-shooter-games/wheresAnEgg-non-english.png" class="game-icon">
+<div class="game-title">Where's An Egg?</div>
+</div></a>
+
+<a href="g/1v1.lol/1v1.LOL.html" class="game-link"><div class="game-tile popular"><img src="g/1v1.lol/1v1lol1.png" class="game-icon"><div class="game-title">1v1.LOL</div></div></a>
+
+<a href="g/9007199254740992/9007199254740992.html" class="game-link"><div class="game-tile"><img src="g/9007199254740992/9007blahblahblah.png" class="game-icon"><div class="game-title">9007199254740992</div></div></a>
+
+<a href="g/99nitf/99nights.html" class="game-link"><div class="game-tile"><img src="g/99nitf/99nights.png" class="game-icon"><div class="game-title">99 Nights</div></div></a>
+
+<a href="g/A Dance Of Fire And Ice/adofai.html" class="game-link"><div class="game-tile popular"><img src="g/A Dance Of Fire And Ice/adofai.png" class="game-icon"><div class="game-title">ADOFAI</div></div></a>
+
+<a href="g/A Dark Room/adarkroom.html" class="game-link"><div class="game-tile"><img src="g/A Dark Room/darkroom.png" class="game-icon"><div class="game-title">A Dark Room</div></div></a>
+
+<a href="g/Agar.io Lite/agariolite.html" class="game-link"><div class="game-tile"><img src="g/Agar.io Lite/lite.png" class="game-icon"><div class="game-title">Agar.io Lite</div></div></a>
+
+<a href="g/Ages Of Conflict/ages of conflict.html" class="game-link"><div class="game-tile"><img src="g/Ages Of Conflict/agescon.jpg" class="game-icon"><div class="game-title">Ages Of Conflict</div></div></a>
+
+<a href="g/Among Us/amongus.html" class="game-link"><div class="game-tile popular"><img src="g/Among Us/sus.png" class="game-icon"><div class="game-title">Among Us</div></div></a>
+
+<a href="g/AquaPark IO/aquaparkio.html" class="game-link"><div class="game-tile popular"><img src="g/AquaPark IO/aqua.png" class="game-icon"><div class="game-title">AquaPark IO</div></div></a>
+
+<a href="g/A Small World Cup/a-small-world-cup.html" class="game-link"><div class="game-tile popular"><img src="g/A Small World Cup/smallworldcup.jpeg" class="game-icon"><div class="game-title">A Small World Cup</div></div></a>
+  
+<a href="g/backrooms2d/Backrooms 2D.html" class="game-link"><div class="game-tile"><img src="g/backrooms2d/backrooms.png" class="game-icon"><div class="game-title">Backrooms 2D</div></div></a>
+
+<a href="g/Bacon May D1e/baconmayd1e.html" class="game-link"><div class="game-tile"><img src="g/Bacon May D1e/bacon.png" class="game-icon"><div class="game-title">Bacon May D!e</div></div></a>
+
+<a href="g/Bad Parenting/badparenting.html" class="game-link"><div class="game-tile"><img src="g/Bad Parenting/parenting.png" class="game-icon"><div class="game-title">Bad Parenting</div></div></a>
+
+<a href="g/Baldi's Basics/BaldisBasicsWORKING.html" class="game-link"><div class="game-tile"><img src="g/Baldi's Basics/baldi.png" class="game-icon"><div class="game-title">Baldi's Basics</div></div></a>
+
+<a href="g/Bas/bas.html" class="game-link"><div class="game-tile"><img src="g/Bas/bas.png" class="game-icon"><div class="game-title">Bas</div></div></a>
+
+<a href="g/Baseball Bros/BaseballBros.html" class="game-link"><div class="game-tile"><img src="g/Baseball Bros/baseballb.png" class="game-icon"><div class="game-title">Baseball Bros</div></div></a>
+
+<a href="g/Basketball Stars/basketballst4rs.html" class="game-link"><div class="game-tile"><img src="g/Basketball Stars/bstar.png" class="game-icon"><div class="game-title">Basketball Stars</div></div></a>
+
+<a href="g/Basketball Superstars/basketballSUPERSTARS.html" class="game-link"><div class="game-tile"><img src="g/Basketball Superstars/bsuperstar.png" class="game-icon"><div class="game-title">Basketball Superstars</div></div></a>
+
+<a href="g/Bitlife/bitlife.html" class="game-link"><div class="game-tile"><img src="g/Bitlife/bitl.png" class="game-icon"><div class="game-title">Bitlife</div></div></a>
+
+<a href="g/Block Breaker/blockbreaker.html" class="game-link"><div class="game-tile"><img src="g/Block Breaker/blockb.png" class="game-icon"><div class="game-title">Block Breaker</div></div></a>
+
+<a href="g/Brotato/brotato.html" class="game-link"><div class="game-tile"><img src="g/Brotato/brotato.png" class="game-icon"><div class="game-title">Brotato</div></div></a>
+
+<a href="g/CaseOhs Basics in Eating And Fast Food/caseohbasics.html" class="game-link"><div class="game-tile"><img src="g/CaseOhs Basics in Eating And Fast Food/Caseoh.png" class="game-icon"><div class="game-title">CaseOh's Basics</div></div></a>
+
+<a href="g/Checkers/checkers.html" class="game-link"><div class="game-tile"><img src="g/Checkers/checkers.png" class="game-icon"><div class="game-title">Checkers</div></div></a>
+
+<a href="g/Chess Classic/chess classic.html" class="game-link"><div class="game-tile"><img src="g/Chess Classic/chessclassic.png" class="game-icon"><div class="game-title">Chess Classic</div></div></a>
+
+<a href="g/Chicken War/chickenwar.html" class="game-link"><div class="game-tile"><img src="g/Chicken War/chickenwar.png" class="game-icon"><div class="game-title">Chicken War</div></div></a>
+
+<a href="g/Clash Of Vikings/clashroyale.html" class="game-link"><div class="game-tile"><img src="g/Clash Of Vikings/clashv.png" class="game-icon"><div class="game-title">Clash Of Vikings</div></div></a>
+
+<a href="g/Cluster Rush/index.html" class="game-link"><div class="game-tile"><img src="g/Cluster Rush/cluster-rush.png" class="game-icon"><div class="game-title">Cluster Rush</div></div></a>
+
+<a href="g/Cookie Clicker/cookieclicker.html" class="game-link"><div class="game-tile"><img src="g/Cookie Clicker/cclicker.jpeg" class="game-icon"><div class="game-title">Cookie Clicker</div></div></a>
+
+<a href="g/crazy-cattle-3d/crazy-cattle-3d.html" class="game-link"><div class="game-tile"><img src="g/crazy-cattle-3d/cc3d.png" class="game-icon"><div class="game-title">Crazy Cattle 3D</div></div></a>
+
+<a href="g/Crossy Road/crossyroad.html" class="game-link"><div class="game-tile"><img src="g/Crossy Road/cross.png" class="game-icon"><div class="game-title">Crossy Road</div></div></a>
+
+<a href="g/Drift Boss/driftboss.html" class="game-link"><div class="game-tile"><img src="g/Drift Boss/driftb.png" class="game-icon"><div class="game-title">Drift Boss</div></div></a>
+
+<a href="g/Drift Hunters/drifthunters.html" class="game-link"><div class="game-tile"><img src="g/Drift Hunters/drifthhhh.png" class="game-icon"><div class="game-title">Drift Hunters</div></div></a>
+
+<a href="g/Elastic Man/elasticman.html" class="game-link"><div class="game-tile"><img src="g/Elastic Man/ElasticMan.png" class="game-icon"><div class="game-title">Elastic Man</div></div></a>
+  
+<a href="g/Escape Road/escaperoad.html" class="game-link"><div class="game-tile"><img src="g/Escape Road/escape.png" class="game-icon"><div class="game-title">Escape Road</div></div></a>
+
+<a href="g/Escape Road 2 City/escaperoad2city.html" class="game-link"><div class="game-tile"><img src="g/Escape Road 2 City/city2.png" class="game-icon"><div class="game-title">Escape Road 2 City</div></div></a>
+
+<a href="g/Five Nights At Baldis/fnab.html" class="game-link"><div class="game-tile"><img src="g/Five Nights At Baldis/fnab.png" class="game-icon"><div class="game-title">FNAB</div></div></a>
+
+<a href="g/Five Nights At Freddy's/fnaf.html" class="game-link"><div class="game-tile popular"><img src="g/Five Nights At Freddy's/fnaf.png" class="game-icon"><div class="game-title">FNAF</div></div></a>
+
+<a href="g/FNAF 2/FNAF2.html" class="game-link"><div class="game-tile"><img src="g/FNAF 2/fnaf2.png" class="game-icon"><div class="game-title">FNAF 2</div></div></a>
+
+<a href="g/FNAF3/fnaf3.html" class="game-link"><div class="game-tile"><img src="g/FNAF3/fnaf3.png" class="game-icon"><div class="game-title">FNAF 3</div></div></a>
+
+<a href="g/FNAF4/fnaf4.html" class="game-link"><div class="game-tile"><img src="g/FNAF4/fnaf4.png" class="game-icon"><div class="game-title">FNAF 4</div></div></a>
+  
+<a href="g/FNAF 4 Halloween/fnaf4halloween.html" class="game-link"><div class="game-tile"><img src="g/FNAF 4 Halloween/fnaf4h.png" class="game-icon"><div class="game-title">FNAF 4 Halloween</div></div></a>
+
+<a href="g/FNAF Pizzeria Sim/FNAFpizzeriasimulator.html" class="game-link"><div class="game-tile"><img src="g/FNAF Pizzeria Sim/fnafpiz.png" class="game-icon"><div class="game-title">FNAF Pizzeria Sim</div></div></a>
+
+<a href="g/FNAF Ultimate Custom Night/FNAFucn.html" class="game-link"><div class="game-tile popular"><img src="g/FNAF Ultimate Custom Night/UCN.png" class="game-icon"><div class="game-title">FNAF UCN</div></div></a>
+
+<a href="g/FNAF sister location/Fnafsisterloco.html" class="game-link"><div class="game-tile"><img src="g/FNAF sister location/sisterloco.png" class="game-icon"><div class="game-title">FNAF Sister Location</div></div></a>
+
+<a href="g/Fall Guys/fallguys.html" class="game-link"><div class="game-tile"><img src="g/Fall Guys/fallguys.png" class="game-icon"><div class="game-title">Fall Guys</div></div></a>
+
+<a href="g/Football Bros/footballbros.html" class="game-link"><div class="game-tile"><img src="g/Football Bros/footballbro.png" class="game-icon"><div class="game-title">Football Bros</div></div></a>
+
+<a href="g/Friday Night Funkin/fnf.html" class="game-link"><div class="game-tile popular"><img src="g/Friday Night Funkin/fnf.png" class="game-icon"><div class="game-title">FNF</div></div></a>
+
+<a href="g/Geometry Dash Lite/geodashlite.html" class="game-link"><div class="game-tile popular"><img src="g/Geometry Dash Lite/geo.png" class="game-icon"><div class="game-title">Geometry Dash Lite</div></div></a>
+
+<a href="g/Geometry Vibes/geometryvibes.html" class="game-link"><div class="game-tile"><img src="g/Geometry Vibes/geovibe.png" class="game-icon"><div class="game-title">Geometry Vibes</div></div></a>
+
+<a href="g/Getaway Shootout/getawayshootout.html" class="game-link"><div class="game-tile"><img src="g/Getaway Shootout/getaway.png" class="game-icon"><div class="game-title">Getaway Shootout</div></div></a>
+
+<a href="g/Granny/GRANNY.html" class="game-link"><div class="game-tile"><img src="g/Granny/granny.png" class="game-icon"><div class="game-title">Granny</div></div></a>
+
+<a href="g/Gun Spin/gunspin.html" class="game-link"><div class="game-tile"><img src="g/Gun Spin/gunspin.jpeg" class="game-icon"><div class="game-title">Gun Spin</div></div></a>
+
+<a href="g/Hollow Knight Silksong/hollowknightsilksong.html" class="game-link"><div class="game-tile"><img src="g/Hollow Knight Silksong/hks.png" class="game-icon"><div class="game-title">Hollow Knight Silksong</div></div></a>
+
+<a href="g/Huggy Wuggy Pixel Nights/huggypixelnights.html" class="game-link"><div class="game-tile"><img src="g/Huggy Wuggy Pixel Nights/hwpn.png" class="game-icon"><div class="game-title">Huggy Pixel Nights</div></div></a>
+
+<a href="g/Just Hit The Button/jhtb.html" class="game-link"><div class="game-tile"><img src="g/Just Hit The Button/jhtb.png" class="game-icon"><div class="game-title">Just Hit The Button</div></div></a>
+
+<a href="g/Nova Craft/nOvAcraft.html" class="game-link"><div class="game-tile"><img src="g/Nova Craft/infc.png" class="game-icon"><div class="game-title">Nova Craft</div></div></a>
+
+<a href="g/Obby 99 Will Lose/obby99willlose.html" class="game-link"><div class="game-tile"><img src="g/Obby 99 Will Lose/99.png" class="game-icon"><div class="game-title">Obby 99 Will Lose</div></div></a>
+
+<a href="g/All Prodigy Versions/prodigy.html" class="game-link"><div class="game-tile"><img src="g/All Prodigy Versions/prodigy.jpeg" class="game-icon"><div class="game-title">Prodigy (all old versions)</div></div></a>
+
+<a href="g/OmegaNuggetClicker/omeganugget.html" class="game-link"><div class="game-tile"><img src="g/OmegaNuggetClicker/weiaufshsiouomega.png" class="game-icon"><div class="game-title">Omega Nugget Clicker</div></div></a>
+
+<a href="g/Raldi's Cr�CK house/Raldi's Crackhouse (1).HTML" class="game-link"><div class="game-tile"><img src="g/Raldi's Cr�CK house/raldi.png" class="game-icon"><div class="game-title">Raldi's Crackhouse</div></div></a>
+
+<a href="g/Sand Boxels/SandBoxels.HTML" class="game-link"><div class="game-tile"><img src="g/Sand Boxels/sandbox.jpg" class="game-icon"><div class="game-title">Sandboxels</div></div></a>
+
+<a href="g/Saul Goodman Run/saulgoodmanrun.html" class="game-link"><div class="game-tile"><img src="g/Saul Goodman Run/saul.png" class="game-icon"><div class="game-title">Saul Goodman Run</div></div></a>
+
+<a href="g/Scary Teacher 3D/scaryteacher3d.html" class="game-link"><div class="game-tile popular"><img src="g/Scary Teacher 3D/st3d.png" class="game-icon"><div class="game-title">Scary Teacher 3D</div></div></a>
+
+<a href="g/Slither IO/slitherIO.html" class="game-link"><div class="game-tile popular"><img src="g/Slither IO/slith.png" class="game-icon"><div class="game-title">Slither.io</div></div></a>
+
+<a href="g/Slope 2 player/Slope2Player.html" class="game-link"><div class="game-tile"><img src="g/Slope 2 player/slope2.png" class="game-icon"><div class="game-title">Slope 2 Player</div></div></a>
+
+<a href="g/Slope 3/slope 3.html" class="game-link"><div class="game-tile popular"><img src="g/Slope 3/slope3.png" class="game-icon"><div class="game-title">Slope 3</div></div></a>
+
+<a href="g/Snowrider 3D/snowrider3d.html" class="game-link"><div class="game-tile"><img src="g/Snowrider 3D/snowrider.png" class="game-icon"><div class="game-title">Snowrider 3D</div></div></a>
+
+<a href="g/Sonic 1/sonic 1.html" class="game-link"><div class="game-tile"><img src="g/Sonic 1/sonic.png" class="game-icon"><div class="game-title">Sonic 1</div></div></a>
+
+<a href="g/Space Waves/space waves.html" class="game-link"><div class="game-tile"><img src="g/Space Waves/sace.png" class="game-icon"><div class="game-title">Space Waves</div></div></a>
+
+<a href="g/Station 141/station141.html" class="game-link"><div class="game-tile"><img src="g/Station 141/141.png" class="game-icon"><div class="game-title">Station 141</div></div></a>
+
+<a href="g/Station Meltdown/stationmeltdown.html" class="game-link"><div class="game-tile"><img src="g/Station Meltdown/stationmelt.png" class="game-icon"><div class="game-title">Station Meltdown</div></div></a>
+
+<a href="g/Station Saturn/stationsaturn.html" class="game-link"><div class="game-tile"><img src="g/Station Saturn/statsat.png" class="game-icon"><div class="game-title">Station Saturn</div></div></a>
+
+<a href="g/Steal A Brainrot/stealabrainrot.html" class="game-link"><div class="game-tile"><img src="g/Steal A Brainrot/sab.png" class="game-icon"><div class="game-title">Steal A Brainrot</div></div></a>
+
+<a href="g/Stickman Hook/stickman hook.html" class="game-link"><div class="game-tile popular"><img src="g/Stickman Hook/stickmanh.png" class="game-icon"><div class="game-title">Stickman Hook</div></div></a>
+
+<a href="g/Temple Run 2/templeRun2.html" class="game-link"><div class="game-tile popular"><img src="g/Temple Run 2/templerun2.png" class="game-icon"><div class="game-title">Temple Run 2</div></div></a>
+
+<a href="g/tomb/totm.html" class="game-link"><div class="game-tile"><img src="g/tomb/totm.png" class="game-icon"><div class="game-title">Tomb Of The Mask</div></div></a>
+  
+<a href="g/Twerk Race 3D/Tw3rk Race 3D.html" class="game-link"><div class="game-tile"><img src="g/Twerk Race 3D/t3rk.png" class="game-icon"><div class="game-title">Twerk Race 3D</div></div></a>
+
+<a href="g/Ultra Kill/ultrakill.html" class="game-link"><div class="game-tile"><img src="g/Ultra Kill/IMG_7277.png" class="game-icon"><div class="game-title">Ultra Kill</div></div></a>
+
+<a href="g/Unicycle Hero/unicyclehero.html" class="game-link"><div class="game-tile"><img src="g/Unicycle Hero/unic.png" class="game-icon"><div class="game-title">Unicycle Hero</div></div></a>
+
+<a href="g/We Become What We Behold/webecomewhatwebehold.html" class="game-link"><div class="game-tile"><img src="g/We Become What We Behold/webec.png" class="game-icon"><div class="game-title">We Become What We Behold</div></div></a>
+
+<a href="g/You Vs 100 Skibidi/you vs 100 skibidi.html" class="game-link"><div class="game-tile"><img src="g/You Vs 100 Skibidi/100skib.png" class="game-icon"><div class="game-title">You vs 100 Skibidi</div></div></a>
+
+<a href="g/Zombie Rush/zombierush.html" class="game-link"><div class="game-tile"><img src="g/Zombie Rush/zmb.png" class="game-icon"><div class="game-title">Zombie Rush</div></div></a>
+
+
+<a href="Emulators/Backyard Baseball 09/baseball9.html" class="game-link"><div class="game-tile"><img src="Emulators/Backyard Baseball 09/baseball.png" class="game-icon"><div class="game-title">Backyard Baseball 09 (suggestions)</div></div></a>
+
+<a href="Emulators/Banjo Kazooie/banjokazooie.html" class="game-link"><div class="game-tile"><img src="Emulators/Banjo Kazooie/banjo.png" class="game-icon"><div class="game-title">Banjo Kazooie</div></div></a>
+
+<a href="Emulators/Banjo Tooie (probably doesn't work)/banjotooie.html" class="game-link"><div class="game-tile"><img src="Emulators/Banjo Tooie (probably doesn't work)/tooie.png" class="game-icon"><div class="game-title">Banjo Tooie</div></div></a>
+
+<a href="Emulators/COD 4 Modern Warefare/COD4MW.html" class="game-link"><div class="game-tile"><img src="Emulators/COD 4 Modern Warefare/mw4.png" class="game-icon"><div class="game-title">COD 4 MW</div></div></a>
+
+<a href="Emulators/COD World At War/CODWAW.html" class="game-link"><div class="game-tile"><img src="Emulators/COD World At War/yayay.png" class="game-icon"><div class="game-title">COD WAW</div></div></a>
+
+<a href="Emulators/Call Of Duty Modern Warfare 3 Defiance/codmw3d.html" class="game-link"><div class="game-tile"><img src="Emulators/Call Of Duty Modern Warfare 3 Defiance/mw3d.png" class="game-icon"><div class="game-title">MW3 Defiance</div></div></a>
+
+<a href="Emulators/Counter Strike/counterstrike.html" class="game-link"><div class="game-tile"><img src="Emulators/Counter Strike/counters.png" class="game-icon"><div class="game-title">Counter Strike</div></div></a>
+
+<a href="Emulators/Crash Bandicoot/crashbandicoot.html" class="game-link"><div class="game-tile"><img src="Emulators/Crash Bandicoot/crashbro.png" class="game-icon"><div class="game-title">Crash Bandicoot</div></div></a>
+
+<a href="Emulators/DB Advance Adventure/DragonballAdvancedA.html" class="game-link"><div class="game-tile"><img src="Emulators/DB Advance Adventure/venutrevance.png" class="game-icon"><div class="game-title">DB Advance Adventure</div></div></a>
+
+<a href="Emulators/DBZ Super Sonic Warriors/dbzsupersonicwarriors.html" class="game-link"><div class="game-tile"><img src="Emulators/DBZ Super Sonic Warriors/superson.png" class="game-icon"><div class="game-title">DBZ Supersonic Warriors</div></div></a>
+
+<a href="Emulators/DBZ The Legacy Of Goku/dbzthelegacyofgoku.html" class="game-link"><div class="game-tile"><img src="Emulators/DBZ The Legacy Of Goku/dbzlegacy.png" class="game-icon"><div class="game-title">DBZ Legacy of Goku</div></div></a>
+
+<a href="Emulators/Diablo/diablo.html" class="game-link"><div class="game-tile"><img src="Emulators/Diablo/diablo.png" class="game-icon"><div class="game-title">Diablo</div></div></a>
+
+<a href="Emulators/Dig Dug/digdug.html" class="game-link"><div class="game-tile"><img src="Emulators/Dig Dug/dugdg.png" class="game-icon"><div class="game-title">Dig Dug</div></div></a>
+
+<a href="Emulators/Donkey Kong/donkeykong.html" class="game-link"><div class="game-tile"><img src="Emulators/Donkey Kong/dkurway.png" class="game-icon"><div class="game-title">Donkey Kong</div></div></a>
+
+<a href="Emulators/Doom/doom.html" class="game-link"><div class="game-tile"><img src="Emulators/Doom/doom.png" class="game-icon"><div class="game-title">Doom</div></div></a>
+
+<a href="Emulators/Duck Hunt/duckhunt.html" class="game-link"><div class="game-tile"><img src="Emulators/Duck Hunt/duck.png" class="game-icon"><div class="game-title">Duck Hunt</div></div></a>
+
+<a href="Emulators/Final Fantasy/finalfantasy.html" class="game-link"><div class="game-tile"><img src="Emulators/Final Fantasy/finalf.png" class="game-icon"><div class="game-title">Final Fantasy</div></div></a>
+
+<a href="Emulators/Final Fantasy 2/finalfantasy2.html" class="game-link"><div class="game-tile"><img src="Emulators/Final Fantasy 2/ff2.png" class="game-icon"><div class="game-title">Final Fantasy2</div></div></a>
+
+<a href="Emulators/Final Fantasy 3/finalfantasy3.html" class="game-link"><div class="game-tile"><img src="Emulators/Final Fantasy 3/ff3.png" class="game-icon"><div class="game-title">Final Fantasy2</div></div></a>
+
+<a href="Emulators/GTA 2 maybe/gta2maybe.html" class="game-link"><div class="game-tile"><img src="Emulators/GTA 2 maybe/gta2222.png" class="game-icon"><div class="game-title">GTA 2</div></div></a>
+
+<a href="Emulators/GTA/gta.html" class="game-link"><div class="game-tile"><img src="Emulators/GTA/gta.png" class="game-icon"><div class="game-title">GTA</div></div></a>
+
+<a href="Emulators/Game and watch collection/gameandwatch.html" class="game-link"><div class="game-tile"><img src="Emulators/Game and watch collection/g&w.png" class="game-icon"><div class="game-title">Game & Watch</div></div></a>
+
+<a href="Emulators/Golden Eye 007/goldeneye007.html" class="game-link"><div class="game-tile"><img src="Emulators/Golden Eye 007/007.png" class="game-icon"><div class="game-title">GoldenEye 007</div></div></a>
+
+<a href="Emulators/Gun Smoke/gunsmoke.html" class="game-link"><div class="game-tile"><img src="Emulators/Gun Smoke/ntgnsmk.png" class="game-icon"><div class="game-title">Gun Smoke</div></div></a>
+
+<a href="Emulators/Halo Combat Devolved/halcombatdevolved.html" class="game-link"><div class="game-tile"><img src="Emulators/Halo Combat Devolved/hcbd.png" class="game-icon"><div class="game-title">Halo Combat Devolved</div></div></a>
+
+<a href="Emulators/Hollow Knight Fanmade/hollowknightnot.html" class="game-link"><div class="game-tile"><img src="Emulators/Hollow Knight Fanmade/hkfnmd.png" class="game-icon"><div class="game-title">HK Fanmade</div></div></a>
+
+<a href="Emulators/Kirby's Adventure/kirbysaventure.html" class="game-link"><div class="game-tile"><img src="Emulators/Kirby's Adventure/kirbadven.png" class="game-icon"><div class="game-title">Kirby's Adventure</div></div></a>
+
+<a href="Emulators/Mario Paint/mariopaint.html" class="game-link"><div class="game-tile"><img src="Emulators/Mario Paint/mpaint.png" class="game-icon"><div class="game-title">Mario Paint</div></div></a>
+
+<a href="Emulators/MarioKart 64/mariokart64.html" class="game-link"><div class="game-tile"><img src="Emulators/MarioKart 64/mk64.png" class="game-icon"><div class="game-title">Mario Kart 64</div></div></a>
+
+<a href="Emulators/Mega Man/megaman.html" class="game-link"><div class="game-tile"><img src="Emulators/Mega Man/megamega.png" class="game-icon"><div class="game-title">Mega Man</div></div></a>
+
+<a href="Emulators/Mega Man 2/megaman2.html" class="game-link"><div class="game-tile"><img src="Emulators/Mega Man 2/megamanii.png" class="game-icon"><div class="game-title">Mega Man 2</div></div></a>
+
+<a href="Emulators/Mega Man 3/megaman3.html" class="game-link"><div class="game-tile"><img src="Emulators/Mega Man 3/mega3.png" class="game-icon"><div class="game-title">Mega Man 3</div></div></a>
+
+<a href="Emulators/Mortal Kombat/mortalkombat.html" class="game-link"><div class="game-tile"><img src="Emulators/Mortal Kombat/mkyey.png" class="game-icon"><div class="game-title">Mortal Kombat</div></div></a>
+
+<a href="Emulators/Mortal Kombat 2/mortalkombat2.html" class="game-link"><div class="game-tile"><img src="Emulators/Mortal Kombat 2/mkii.png" class="game-icon"><div class="game-title">Mortal Kombat 2</div></div></a>
+
+<a href="Emulators/Mortal Kombat 3/mortalkombat3.html" class="game-link"><div class="game-tile"><img src="Emulators/Mortal Kombat 3/mk3.png" class="game-icon"><div class="game-title">Mortal Kombat 3</div></div></a>
+
+<a href="Emulators/Ms. Pac Man/mspacman.html" class="game-link"><div class="game-tile"><img src="Emulators/Ms. Pac Man/mspac.png" class="game-icon"><div class="game-title">Ms. Pac-Man</div></div></a>
+
+<a href="Emulators/Pac Man/pacman.html" class="game-link"><div class="game-tile"><img src="Emulators/Pac Man/pacman.png" class="game-icon"><div class="game-title">Pac-Man</div></div></a>
+
+<a href="Emulators/Sonic Advance/sonicadvance.html" class="game-link"><div class="game-tile"><img src="Emulators/Sonic Advance/savd.png" class="game-icon"><div class="game-title">Sonic Advance</div></div></a>
+
+<a href="Emulators/Sonic Advance 2/sonicadvance2.html" class="game-link"><div class="game-tile"><img src="Emulators/Sonic Advance 2/sa2.png" class="game-icon"><div class="game-title">Sonic Advance 2</div></div></a>
+
+<a href="Emulators/Sonic Advance 3/sonicadvance3.html" class="game-link"><div class="game-tile"><img src="Emulators/Sonic Advance 3/sa3.png" class="game-icon"><div class="game-title">Sonic Advance 3</div></div></a>
+
+<a href="Emulators/Sonic Classic Collection/sonicclassicc.html" class="game-link"><div class="game-tile"><img src="Emulators/Sonic Classic Collection/scc.png" class="game-icon"><div class="game-title">Sonic Classic Collection</div></div></a>
+
+<a href="Emulators/Sonic Colors/sonicolors.html" class="game-link"><div class="game-tile"><img src="Emulators/Sonic Colors/soniccolor.png" class="game-icon"><div class="game-title">Sonic Colors</div></div></a>
+
+<a href="Emulators/Sonic Rush/sonicrush.html" class="game-link"><div class="game-tile"><img src="Emulators/Sonic Rush/srus.png" class="game-icon"><div class="game-title">Sonic Rush</div></div></a>
+
+<a href="Emulators/Space Invaders/spaceinvaders.html" class="game-link"><div class="game-tile"><img src="Emulators/Space Invaders/space.png" class="game-icon"><div class="game-title">Space Invaders</div></div></a>
+
+<a href="Emulators/Street Fighter 2/streetfighter2.html" class="game-link"><div class="game-tile"><img src="Emulators/Street Fighter 2/st2.png" class="game-icon"><div class="game-title">Street Fighter 2</div></div></a>
+
+<a href="Emulators/Super Mario 64/supermario64.html" class="game-link"><div class="game-tile popular"><img src="Emulators/Super Mario 64/sm64.png" class="game-icon"><div class="game-title">Super Mario 64</div></div></a>
+
+<a href="Emulators/Super Mario Bros/supermariobros.html" class="game-link"><div class="game-tile"><img src="Emulators/Super Mario Bros/smb.png" class="game-icon"><div class="game-title">Super Mario Bros</div></div></a>
+
+<a href="Emulators/Super Mario Bros 2/supermariobros2.html" class="game-link"><div class="game-tile"><img src="Emulators/Super Mario Bros 2/smll.png" class="game-icon"><div class="game-title">Super Mario Bros 2</div></div></a>
+
+<a href="Emulators/Super Mario Bros 3/supermariobros3.html" class="game-link"><div class="game-tile"><img src="Emulators/Super Mario Bros 3/sm3y.png" class="game-icon"><div class="game-title">Super Mario Bros 3</div></div></a>
+
+<a href="Emulators/Super Mario Allstars/supermarioallstars.html" class="game-link"><div class="game-tile"><img src="Emulators/Super Mario Allstars/allstars.png" class="game-icon"><div class="game-title">Super Mario All-Stars</div></div></a>
+  
+<a href="Emulators/Super Smash Bros/supersmashbros.html" class="game-link"><div class="game-tile popular"><img src="Emulators/Super Smash Bros/sms.png" class="game-icon"><div class="game-title">Super Smash Bros</div></div></a>
+
+<a href="Emulators/Tecmo Bowl/tecmobowl49.html" class="game-link"><div class="game-tile"><img src="Emulators/Tecmo Bowl/tbdad.png" class="game-icon"><div class="game-title">Tecmo Bowl</div></div></a>
+
+<a href="Emulators/Tom Clancy's Rainbow Six/rainbow6.html" class="game-link"><div class="game-tile"><img src="Emulators/Tom Clancy's Rainbow Six/tcr6.png" class="game-icon"><div class="game-title">Rainbow Six</div></div></a>
+
+<a href="Emulators/Ultimate Mortal Kombat/ultimatemortalk.html" class="game-link"><div class="game-tile"><img src="Emulators/Ultimate Mortal Kombat/ultimatemk.png" class="game-icon"><div class="game-title">Ultimate MK</div></div></a>
+
+<a href="Emulators/Wolfenstein 3D/wolfenstein3d.html" class="game-link"><div class="game-tile"><img src="Emulators/Wolfenstein 3D/wolf.png" class="game-icon"><div class="game-title">Wolfenstein 3D</div></div></a>
+
+
+
+
+<a href="Scratch Games/Doom Dungeon 2.HTML" class="game-link"><div class="game-tile"><img src="Scratch Games/Ascratch.png" class="game-icon"><div class="game-title">Doom Dungeon 2</div></div></a>
+<a href="Scratch Games/Duel!.HTML" class="game-link"><div class="game-tile"><img src="Scratch Games/Ascratch.png" class="game-icon"><div class="game-title">Duel!</div></div></a>
+<a href="Scratch Games/City Simulator.HTML" class="game-link"><div class="game-tile"><img src="Scratch Games/Ascratch.png" class="game-icon"><div class="game-title">City Simulator</div></div></a>
+<a href="Scratch Games/Creature.HTML" class="game-link"><div class="game-tile"><img src="Scratch Games/Ascratch.png" class="game-icon"><div class="game-title">Creature</div></div></a>
+<a href="Scratch Games/EmeraldKart.HTML" class="game-link"><div class="game-tile"><img src="Scratch Games/Ascratch.png" class="game-icon"><div class="game-title">Emerald Kart</div></div></a>
+<a href="Scratch Games/Fortnite(Extremely Slow).HTML" class="game-link"><div class="game-tile"><img src="Scratch Games/Ascratch.png" class="game-icon"><div class="game-title">Fortnite (Extremely Slow)</div></div></a>
+<a href="Scratch Games/FortniteZ(slow).HTML" class="game-link"><div class="game-tile"><img src="Scratch Games/Ascratch.png" class="game-icon"><div class="game-title">FortniteZ (slow)</div></div></a>
+<a href="Scratch Games/Illusyum.HTML" class="game-link"><div class="game-tile"><img src="Scratch Games/Ascratch.png" class="game-icon"><div class="game-title">Illusyum</div></div></a>
+<a href="Scratch Games/Power Tower!.HTML" class="game-link"><div class="game-tile"><img src="Scratch Games/Ascratch.png" class="game-icon"><div class="game-title">Power Tower!</div></div></a>
+<a href="Scratch Games/Tower Of Scratch.HTML" class="game-link"><div class="game-tile"><img src="Scratch Games/Ascratch.png" class="game-icon"><div class="game-title">Tower Of Scratch</div></div></a>
+<a href="Scratch Games/Vectoid Tower Defense V1.4.HTML" class="game-link"><div class="game-tile"><img src="Scratch Games/Ascratch.png" class="game-icon"><div class="game-title">Vectoid Tower Defense V1.4</div></div></a>
+
+
+
+
+<a href="Scratch Games/Farming Interactive 3.HTML" class="game-link"><div class="game-tile"><img src="Scratch Games/Ascratch.png" class="game-icon"><div class="game-title">Farming Interactive 3</div></div></a>
+
+
+
+
+
+
+<a href="Scratch Games/Flappy Bird.HTML" class="game-link"><div class="game-tile"><img src="Scratch Games/Ascratch.png" class="game-icon"><div class="game-title">Flappy Bird</div></div></a>
+<a href="Scratch Games/Flip 3D.HTML" class="game-link"><div class="game-tile"><img src="Scratch Games/Ascratch.png" class="game-icon"><div class="game-title">Flip 3D</div></div></a>
+<a href="Scratch Games/Geometry Dash.HTML" class="game-link"><div class="game-tile"><img src="Scratch Games/Ascratch.png" class="game-icon"><div class="game-title">Geometry Dash</div></div></a>
+<a href="Scratch Games/Golf Battle.HTML" class="game-link"><div class="game-tile"><img src="Scratch Games/Ascratch.png" class="game-icon"><div class="game-title">Golf Battle</div></div></a>
+<a href="Scratch Games/Golformer.HTML" class="game-link"><div class="game-tile"><img src="Scratch Games/Ascratch.png" class="game-icon"><div class="game-title">Golformer</div></div></a>
+<a href="Scratch Games/Hide and Seek.HTML" class="game-link"><div class="game-tile"><img src="Scratch Games/Ascratch.png" class="game-icon"><div class="game-title">Hide and Seek</div></div></a>
+
+
+
+<a href="Scratch Games/Mystic Valley.HTML" class="game-link"><div class="game-tile"><img src="Scratch Games/Ascratch.png" class="game-icon"><div class="game-title">Mystic Valley</div></div></a>
+<a href="Scratch Games/Old Western Way.HTML" class="game-link"><div class="game-tile"><img src="Scratch Games/Ascratch.png" class="game-icon"><div class="game-title">Old Western Way</div></div></a>
+<a href="Scratch Games/Paper Minecraft.HTML" class="game-link"><div class="game-tile"><img src="Scratch Games/Ascratch.png" class="game-icon"><div class="game-title"> </div></div></a>
+<a href="" class="game-link"><div class="game-tile"><img src="Scratch Games/Ascratch.png" class="game-icon"><div class="game-title">Paper Minecraft</div></div></a>
+<a href="Scratch Games/Partisan.HTML" class="game-link"><div class="game-tile"><img src="Scratch Games/Ascratch.png" class="game-icon"><div class="game-title">Partisan</div></div></a>
+<a href="Scratch Games/Pokemon Clicker.HTML" class="game-link"><div class="game-tile"><img src="Scratch Games/Ascratch.png" class="game-icon"><div class="game-title">Pokemon Clicker</div></div></a>
+
+
+
+<a href="Scratch Games/Random Tycoon Thing.HTML" class="game-link"><div class="game-tile"><img src="Scratch Games/Ascratch.png" class="game-icon"><div class="game-title">Random Tycoon Thing</div></div></a>
+<a href="Scratch Games/Slash Knight.HTML" class="game-link"><div class="game-tile"><img src="Scratch Games/Ascratch.png" class="game-icon"><div class="game-title">Slash Knight</div></div></a>
+<a href="Scratch Games/Spacevale.HTML" class="game-link"><div class="game-tile"><img src="Scratch Games/Ascratch.png" class="game-icon"><div class="game-title">Spacevale</div></div></a>
+<a href="Scratch Games/Sticky Situation.HTML" class="game-link"><div class="game-tile"><img src="Scratch Games/Ascratch.png" class="game-icon"><div class="game-title">Sticky Situation</div></div></a>
+<a href="Scratch Games/Teamwork.HTML" class="game-link"><div class="game-tile"><img src="Scratch Games/Ascratch.png" class="game-icon"><div class="game-title">Teamwork</div></div></a>
+<a href="Scratch Games/The Crusty Quest.HTML" class="game-link"><div class="game-tile"><img src="Scratch Games/Ascratch.png" class="game-icon"><div class="game-title">The Crusty Quest</div></div></a>
+<a href="Scratch Games/Tower Defense Game.HTML" class="game-link"><div class="game-tile"><img src="Scratch Games/Ascratch.png" class="game-icon"><div class="game-title">Tower Defense Game</div></div></a>
+<a href="Scratch Games/Tower Defense.HTML" class="game-link"><div class="game-tile"><img src="Scratch Games/Ascratch.png" class="game-icon"><div class="game-title">Tower Defense</div></div></a>
+
+
+
+<a href="Scratch Games/Upside Down.HTML" class="game-link"><div class="game-tile"><img src="Scratch Games/Ascratch.png" class="game-icon"><div class="game-title">Upside Down</div></div></a>
+
+
+
+<a href="Scratch Games/ボールころころ2.HTML" class="game-link"><div class="game-tile"><img src="Scratch Games/Ascratch.png" class="game-icon"><div class="game-title">ボールころころ2</div></div></a>
+
+  
+
+
+  </div>
+
+<script>
+
+/* ===== SEARCH ===== */
+document.getElementById("search").addEventListener("keyup", function() {
+  let filter = this.value.toLowerCase();
+  let games = document.querySelectorAll(".game-link");
+
+  games.forEach(game => {
+    let title = game.innerText.toLowerCase();
+    game.style.display = title.includes(filter) ? "block" : "none";
+  });
+});
+
+/* ===== CATEGORY FILTER ===== */
+function filterGames(category) {
+  let games = document.querySelectorAll(".game-link");
+
+  games.forEach(game => {
+    if (category === "all") {
+      game.style.display = "block";
+    } else {
+      let cats = game.getAttribute("data-category");
+      game.style.display = cats.includes(category) ? "block" : "none";
+    }
+  });
+}
+
+function closeFlashPopup() {
+  document.getElementById("flashPopup").style.display = "none";
+}
+
+/* ===== SORT GAMES ALPHABETICALLY ===== */
+function sortGamesAlphabetically() {
+    const container = document.getElementById("gameContainer");
+
+    const games = Array.from(container.querySelectorAll(".game-link"));
+
+    games.sort((a, b) => {
+        const titleA = a.querySelector(".game-title").textContent.trim().toLowerCase();
+        const titleB = b.querySelector(".game-title").textContent.trim().toLowerCase();
+
+        return titleA.localeCompare(titleB);
+    });
+
+    games.forEach(game => container.appendChild(game));
+}
+
+// Sort when page loads
+window.addEventListener("load", sortGamesAlphabetically);
+  
+</script>
 
 </body>
 </html>
