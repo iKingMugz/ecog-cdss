@@ -1,115 +1,45 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Opal - Video Game Music</title>
+<title>POG Sites</title>
 
 <style>
 
-/* global */
 body {
   margin: 0;
   font-family: Arial, sans-serif;
-  background: radial-gradient(circle at top, #213344, #111826, #080b10);
+  background: radial-gradient(circle at top, #193d18ff, #0e220bff, #040f07ff);
   color: white;
 }
 
-/* navbar */
 .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 14px 20px;
-
-  background: rgba(28,38,55,.78);
+  background: rgba(17, 220, 75, 0.78);
   backdrop-filter: blur(10px);
-
-  border-bottom: 1px solid rgba(210,235,255,.18);
+  border-bottom: 1px solid rgba(15, 197, 30, 0.15);
 }
 
-/* logo */
-.logo {
-  font-size: 22px;
-  font-weight: bold;
 
-  background: linear-gradient(
-      90deg,
-      #ffffff,
-      #bde9ff,
-      #ffc8ea,
-      #d8c6ff,
-      #ffffff
-  );
-
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-/* search */
-.search-box {
-  padding: 8px 12px;
-  border-radius: 10px;
-
-  border: 1px solid rgba(210,235,255,.2);
-
-  background: rgba(255,255,255,.05);
-
-  color: white;
-
-  outline: none;
-}
-
+\
 .search-box::placeholder {
-  color: #d9ebff;
+  color: #00c828ff;
 }
 
-/* category buttons */
-.categories {
-  text-align: center;
-  margin: 18px;
-}
 
-.categories button {
 
-  margin: 6px;
-  padding: 10px 15px;
-
-  border-radius: 12px;
-
-  border: 1px solid rgba(255,255,255,.12);
-
-  cursor: pointer;
-
-  font-weight: bold;
-
-  color: white;
-
-  background: linear-gradient(
-      135deg,
-      #b8e9ff,
-      #ffc4e6
-  );
-
-  transition: .25s;
-}
-
-.categories button:hover {
-
+.nav-button:hover {
   transform: translateY(-2px) scale(1.05);
-
-  background: linear-gradient(
-      135deg,
-      #e8f9ff,
-      #ffd8ef
-  );
-
-  box-shadow:
-      0 0 18px rgba(190,235,255,.45),
-      0 0 18px rgba(255,190,225,.25);
+  background: linear-gradient(135deg, #d8ffdeff, #7bff82ff);
+  box-shadow: 0 0 22px rgba(120, 255, 131, 0.55);
 }
 
-/* grid */
 .flex-container {
   display: flex;
   flex-wrap: wrap;
@@ -118,26 +48,16 @@ body {
   padding: 25px;
 }
 
-/* links */
 .game-link {
   text-decoration: none;
 }
 
-/* game tile */
 .game-tile {
-
   width: 190px;
   padding: 10px;
-
   text-align: center;
 
-  background: rgba(255,255,255,.06);
-
-  border: 1px solid rgba(220,240,255,.15);
-
-  border-radius: 16px;
-
-  backdrop-filter: blur(10px);
+  
 
   transition: .25s ease;
 
@@ -145,29 +65,21 @@ body {
   overflow: hidden;
 }
 
-/* opal shimmer */
 .game-tile::before {
-
   content: "";
-
   position: absolute;
-
   top: -50%;
   left: -50%;
-
   width: 200%;
   height: 200%;
 
   background:
       radial-gradient(circle,
-      rgba(190,235,255,.18),
-      rgba(255,205,235,.12),
-      transparent 70%);
+      rgba(180, 255, 170, 0.22),
+      transparent 65%);
 
   transform: rotate(25deg);
-
   opacity: 0;
-
   transition: .3s;
 }
 
@@ -176,138 +88,173 @@ body {
 }
 
 .game-tile:hover {
-
   transform: translateY(-6px) scale(1.05);
-
-  border-color: rgba(190,235,255,.35);
-
+  border-color: rgba(163, 255, 140, 0.45);
   box-shadow:
-      0 0 25px rgba(180,225,255,.18),
-      0 0 35px rgba(255,195,230,.15);
+      0 0 25px rgba(110, 255, 122, 0.28),
+      0 0 40px rgba(70, 220, 92, 0.18);
 }
 
-/* images */
 .game-icon {
-
   width: 100%;
-
   aspect-ratio: 1 / 1;
-
-  object-fit: fill;
+  object-fit: cover;
 
   border-radius: 12px;
-
-  border: 2px solid rgba(255,255,255,.1);
+  border: 2px solid rgba(180, 255, 203, 0.12);
 
   transition: .25s;
 }
 
 .game-tile:hover .game-icon {
-  border-color: rgba(255,255,255,.35);
+  border-color: rgba(210, 255, 221, 0.45);
 }
 
-/* title */
 .game-title {
-
   margin-top: 10px;
-
   font-size: 14px;
-
   font-weight: 600;
-
-  color: #f6fbff;
+  color: #e6ffe5ff;
 }
-
-/* popular */
 
 .popular {
-
-  border: 1px solid #ffc8ea;
-
-  box-shadow:
-      0 0 20px rgba(255,200,234,.35);
+  border: 1px solid #a4ff9cff;
+  box-shadow: 0 0 18px rgba(150, 255, 140, 0.35);
 }
 
 </style>
+  
 </head>
 
 <body>
-<!-- NAVIGATION BAR -->
+
+<div id="flashPopup" class="flash-popup">
+
+  <div class="flash-popup-box">
+
+    <h1 class="flash-title">POG Sites</h1>
+
+    <p class="flash-desc">
+      Welcome to POG Sites! The ultimate collection of over 600 games by MTKSIKM!  
+      Please join the 
+      <a href="https://docs.google.com/document/d/1qLyKvXo3Ed605YzdAWZjtgIXsbjtD3BDLIWozPZMRU4/" target="_blank" class="flash-link">Discord</a> 
+      to help support us! We are currently trying to get more games, so stay tuned!
+    </p>
+
+    <button class="flash-button" onclick="closeFlashPopup()">Play!</button>
+
+  </div>
+
+</div>
+  
 <style>
+
+
 .navbar {
-
     text-align: center;
-
     margin-bottom: 20px;
 }
 
 .nav-button {
-
     display: inline-block;
-
     padding: 12px 20px;
-
     margin: 10px;
 
+    background: linear-gradient(135deg, #afffa9ff, #80ff6cff);
     color: white;
-
     font-weight: bold;
-
     text-decoration: none;
 
     border-radius: 12px;
-
-    border: 1px solid rgba(255,255,255,.12);
-
-    background: linear-gradient(
-        135deg,
-        #b8e9ff,
-        #ffc4e6
-    );
+    border: 1px solid rgba(210, 255, 214, 0.15);
 
     transition: .25s;
-
-    box-shadow:
-        0 5px 18px rgba(170,220,255,.22);
+    box-shadow: 0 5px 18px rgba(70, 190, 76, 0.35);
 }
 
 .nav-button:hover {
+    transform: translateY(-3px) scale(1.05);
+
+    background: linear-gradient(
+        135deg,
+        #d8ffddff,
+        #92ffa8ff
+    );
+
+    box-shadow:
+        0 0 20px rgba(147, 255, 120, 0.45),
+        0 0 35px rgba(80, 220, 94, 0.25);
+}
+
+
+
+.flash-popup {
+    position: fixed;
+    inset: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: rgba(4, 15, 5, 0.88);
+    backdrop-filter: blur(10px);
+
+    z-index: 9999;
+}
+
+
+.flash-popup-box {
+
+    width: 80%;
+    max-width: 650px;
+
+    padding: 42px;
+
+    text-align: center;
+
+    border-radius: 22px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(30, 78, 52, 0.95),
+            rgba(12, 40, 15, 0.95)
+        );
+
+    border: 1px solid rgba(180, 255, 195, 0.25);
+
+
+  
+
+.flash-button:hover {
 
     transform: translateY(-3px) scale(1.05);
 
     background: linear-gradient(
         135deg,
-        #ecfbff,
-        #ffddef
+        #d8ffd8ff,
+        #a1ff92ff
     );
 
     box-shadow:
-        0 0 18px rgba(190,235,255,.45),
-        0 0 22px rgba(255,200,235,.30);
+        0 0 25px rgba(127, 255, 120, 0.45);
 }
+  
 </style>
+
 <div class="navbar">
     <a href="index.html" class="nav-button">🏠 Back Home</a>
 </div>
 
-<div class="navbar">
-	<a href="aifiles.html" class="nav-button">🤖 Opal - AI Games</a>
-	<a href="otherfiles.html" class="nav-button">➕ Opal - Extra Files</a>
-    <a href="scratch.html" class="nav-button">😼 Opal - Scratch Games</a>
-</div>
 
 
-<!-- NAVBAR -->
 <div class="navbar">
-  <div class="logo">Opal - Video Game Music</div>
+  <div class="logo">POG Sites</div>
   <input type="text" id="search" class="search-box" placeholder="Search games...">
 </div>
 
 
-<!-- GAMES -->
 <div class="flex-container" id="gameContainer">
-
-
 
 
 <style>
@@ -753,9 +700,7 @@ body {
 
 
 
-
-
-</div>
+  </div>
 
 <script>
 
@@ -784,6 +729,29 @@ function filterGames(category) {
   });
 }
 
+function closeFlashPopup() {
+  document.getElementById("flashPopup").style.display = "none";
+}
+
+/* ===== SORT GAMES ALPHABETICALLY ===== */
+function sortGamesAlphabetically() {
+    const container = document.getElementById("gameContainer");
+
+    const games = Array.from(container.querySelectorAll(".game-link"));
+
+    games.sort((a, b) => {
+        const titleA = a.querySelector(".game-title").textContent.trim().toLowerCase();
+        const titleB = b.querySelector(".game-title").textContent.trim().toLowerCase();
+
+        return titleA.localeCompare(titleB);
+    });
+
+    games.forEach(game => container.appendChild(game));
+}
+
+// Sort when page loads
+window.addEventListener("load", sortGamesAlphabetically);
+  
 </script>
 
 </body>
